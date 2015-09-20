@@ -8,7 +8,7 @@ define("DB_HOST", "localhost");
 define("DB_NAME", "FlowSign");
 define("DB_USER", "root");
 define("DB_PSW", "");
-//define("DB_OPTIONS", array());
+define("DB_OPTIONS", "");
 /*
  * ** DB 2 SETTINGS **
  */
@@ -17,7 +17,7 @@ define("DB2_HOST", "localhost");
 define("DB2_NAME", "JoomlaOne");
 define("DB2_USER", "root");
 define("DB2_PSW", "");
-define("DB_OPTIONS", "");
+define("DB2_OPTIONS", "");
 
 /*
  * ** ROUTING SETTINGS **
@@ -28,7 +28,7 @@ define("APP_URL",$app_url);
 define("APP_ROOT",$app_root);
 
 /**
- * ** Template Settings **
+ * ** Template Settings
  */
 define ("TEMPLATE", "core");
 
@@ -38,7 +38,7 @@ define ("TEMPLATE", "core");
 $debug = true;
 define('APP_DEBUG', $debug);
 if ($debug) {
-    require 'libraries/3rdparty/kint/Kint.class.php';
+    require '../libraries/3rdparty/kint/Kint.class.php';
 //    Kint::dump( $_SERVER );
     // or, even easier, use a shorthand:
 //    d( $_SERVER );
@@ -51,5 +51,5 @@ if ($debug) {
     // to disable all output
 //    Kint::enabled(true);
     // further calls, this one included, will not yield any output
-//    d('Get off my lawn!'); // no effect
+    //    d('Get off my lawn!'); // no effect
 }

@@ -53,8 +53,29 @@ class Database {
      * @param mixed $value
      */
     public function bindValue ($param, $value) {
-        $this->stm->bindValue($param,$value);
+        $this->stm->bindParam($param,$value);
     }
+    
+    public function nativeQuery($query,$params) {
+       $this->query($query);
+       $this->paramsBinder($params);
+       $this->execute();
+       return $this->stm->fetch(PDO::FETCH_ASSOC);
+    }
+    
+    public function findMagic($query, $params) {
+        $this->query($query);
+        $this->paramsBinder($params);
+        $this->execute();
+        return $this->stm->fetch(PDO::FETCH_OBJ);
+    }
+    public function findMagicSet($query, $params) {
+        $this->query($query);
+        $this->paramsBinder($params);
+        $this->execute();
+        return $this->stm->fetchAll(PDO::FETCH_OBJ);
+    }
+    
     /**
      *
      * @param object $object
@@ -76,7 +97,6 @@ class Database {
         foreach ($params as $key => $value) {
             $key++; // + 1 for bindParams
             $this->bindValue($key, $value);
-            echo "$key and $value";
         }
         return $this->fetchSingleObject($object);
     }
@@ -108,9 +128,9 @@ class Database {
      * @param int $current
      * @param int $min
      * @param int $max
-     * @return list
+     * @return list 
      */
-    public function findAll($object,$query=null,$values=null,$current=null,$min=null,$max=null) {
+    public function findAll($object,$query=null,$values=null,$current=null,$max=null,$order=null) {
         try {
         $table = $this->objectInjector($object);
         } catch (Exception $e) {
@@ -120,15 +140,37 @@ class Database {
             return;
         }
         $statement = "SELECT * FROM $table ".$query;
+        if (isset($current) && isset($max)) {
+            if(isset($order)) {
+                $statement.=" ".$order;
+            }
+            $statement.= " LIMIT ?, ? ";
+        }
         $this->stm = $this->pdo->prepare($statement);
+        $lastValue = 0;
         if ($query && $values){
             foreach ($query as $key => $value) {
                 $key++; // + 1 for bindParams
                 $this->bindValue($key, $value);
+                $lastValue++;
             }
+        }
+        if (isset($current) && isset($max)) {
+            $this->stm->bindParam(++$lastValue, $current, PDO::PARAM_INT);
+            $this->stm->bindParam(++$lastValue, $max, PDO::PARAM_INT);
+
         }
         return $this->fetchObjectSet($object);
     }
+    
+    public function countObjects($object) {
+        $table = $this->objectInjector($object);
+        $query = "SELECT COUNT(*) FROM $table";
+        $this->query($query);
+        return $this->rowCount();
+    }
+    
+  
     /**
      *
      * @param object $object
@@ -140,6 +182,10 @@ class Database {
             $this->stm->execute();
         }
 
+    }
+    public function rowCount() {
+        $this->execute();
+        return $this->stm->fetchColumn();
     }
     public function resultSet() {
         $this->execute();
@@ -258,26 +304,17 @@ class Database {
 
     private function objectInjector($object) {
         if (!is_object($object)) {
-            throw new Exception ('the argument passed is not an object');
+            throw new Exception ('PlayPHP exception: the argument passed is not an object');
         } else {
             return strtolower(get_class($object));
         }
-
-//        try {
-//            is_object($object);
-//            return strtolower(get_class($object));
-//        } catch (Exception $ex) { // might require a custom exception
-//            $this->ex = $ex->getMessage();
-//            if (APP_DEBUG) {
-//                d($ex->getTrace());
-//            }
-//        }
-//        return;
-//
-//        if (is_object($object)) {
-//            return strtolower(get_class($object));
-//        }
-//        return null;
+    }
+    
+    private function paramsBinder($params) {
+        foreach ($params as $key => $value) {
+            $key++; // + 1 for bindParams
+            $this->bindValue($key, $value);
+        }
     }
 
 }

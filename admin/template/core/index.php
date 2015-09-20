@@ -31,16 +31,23 @@ and open the template in the editor.
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li> <a href="<?php echo router("frontend", "index") ?>">Home</a> </li>
-        <li> <a href="<?php echo router("frontend", "register") ?>">Register</a> </li>
-        <li> <a href="<?php echo router("frontend", "blog") ?>">Blog</a> </li>
+        <li> <a href="<?php echo router("admin", "index") ?>">Home</a> </li>
+        <li> <a href="<?php echo router("admin", "products") ?>">Products</a> </li>
       </ul>
 </nav>
+                <?php 
+                if (isset($message['error'])) {
+                    echo'<div class="alert alert-warning alert-dismissible" role="alert">'
+                            . '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>'
+                            . '<strong>'.$message['error'].'</strong></div>';
+                }
+                
+                ?>
                 <div class="page-header text-center">
                     <h1><?php echo $page_title ?></h1>
                 </div>
                 <div class="container container-center col-xs-8 col-xs-offset-2">
-                    <?php include($page_content) ?>
+                    <?php include($page_content);?>
                 </div>
             </div>
     <?php if(isset($bottom)) { ?>

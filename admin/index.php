@@ -1,6 +1,6 @@
 <?php
-include_once '/controller/Frontend.php';
-require '/libraries/Router.php';
+include_once '/controller/Admin.php';
+require '../libraries/Router.php';
 $params=array();
     if(isset($_GET['controller'])&&isset($_GET['action'])){
         $c = $_GET['controller'];   
@@ -26,6 +26,6 @@ $params=array();
     
     }  else {   
     //attiva controller predefinito    
-    $controller = new Frontend();
+    $controller = new Admin();
     $controller->index();
     }

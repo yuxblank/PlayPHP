@@ -1,8 +1,5 @@
 <?php
-require_once 'class/Sessions.php';
-require_once 'class/Template.php';
-require_once 'model/Products.php';
-require_once 'class/Database.php';
+
 /*
  * Copyright (C) 2015 yuri.blanc
  *
@@ -21,23 +18,19 @@ require_once 'class/Database.php';
  */
 
 /**
- * Description of PlayController
+ * Description of BlogPost
  *
  * @author yuri.blanc
  */
-class PlayController {
+class BlogPost {
+    public $id;
+    public $title;
+    public $text;
     
-    public function sessionStart () {
-        $session = new Sessions();
-        $session->init();
+    function __construct($id=null, $title=null, $text=null) {
+        $this->id = $id;
+        $this->title = $title;
+        $this->text = $text;
     }
-    
-    public static function keep($flash,$data) {
-        $sessions = new Sessions();
-        $_SESSION['flash'] = array(
-            $flash => $data
-        );
-    }
-    
-    
+
 }

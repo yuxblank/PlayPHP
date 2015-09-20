@@ -1,5 +1,6 @@
 <?php
-require './class/Template.php';
+require './class/PlayController.php';
+require './model/BlogPost.php';
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -11,7 +12,7 @@ require './class/Template.php';
  *
  * @author yuri.blanc
  */
-class Frontend {
+class Frontend extends PlayController {
     private $template;
     
     public function index() {
@@ -23,7 +24,7 @@ class Frontend {
         )
         );
         $this->template->renderArgs("bottom", $bottom);
-	$this->template->renderArgs("page_title", "home");
+        $this->template->renderArgs("page_title","Welcome");
         $this->template->render(get_class($this), "index", "Welcome");
 
     }
@@ -32,7 +33,22 @@ class Frontend {
     }
     public function register() {
         $this->template = new Template();
-	$this->template->renderArgs("page_title", "test");
+        $this->template->renderArgs("page_title","Register");
         $this->template->render(get_class($this), "register", "Registra");
+    }
+    
+    public function blog($params) {
+        $this->template = new Template();
+        $db = new Database();
+        $obj = new BlogPost();
+        $current = isset($params['page']) ? $params['page'] : 0;
+        echo $current;
+        $items = $db->countObjects($obj);
+        $pages = ceil($items/5);
+        $blogPosts = $db->findAll($obj, null, null, $current^2-1, 5+$current-1,"ORDER BY id ASC");
+        $this->template->renderArgs("page_title","Blog");
+        $this->template->renderArgs("pages",$pages);
+        $this->template->renderArgs("posts", $blogPosts);
+        $this->template->render(get_class($this), "blog");
     }
 }
