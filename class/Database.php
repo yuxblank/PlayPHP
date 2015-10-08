@@ -1,9 +1,9 @@
 <?php
-
+include './config/database.php';
 //use Exception;
 
 //use PDO;
-//require "../settings.php";
+//require "../database.php";
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -259,7 +259,7 @@ class Database {
     }
     /**
      * @final
-     * Override DB settings for current object state
+     * Override DB config for current object state
      * @param type $dbDriver
      * @param type $dbHost
      * @param type $dbName

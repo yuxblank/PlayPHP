@@ -31,9 +31,9 @@ and open the template in the editor.
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li> <a href="<?php echo router("frontend", "index") ?>">Home</a> </li>
-        <li> <a href="<?php echo router("frontend", "register") ?>">Register</a> </li>
-        <li> <a href="<?php echo router("frontend", "blog") ?>">Blog</a> </li>
+          <li> <a href="<?php echo APP_URL ?>">Home</a> </li>
+        <li> <a href="<?php echo Router::go("Frontend@register")?>">Register</a> </li>
+        <li> <a href="<?php echo Router::go("Frontend@blog") ?>">Blog</a> </li>
       </ul>
 </nav>
                 <div class="page-header text-center">

@@ -19,7 +19,7 @@ if ( is_readable( KINT_DIR . 'config.php' ) ) {
 	require KINT_DIR . 'config.php';
 }
 
-# init settings
+# init config
 if ( !empty( $GLOBALS['_kint_settings'] ) ) {
 	Kint::enabled( $GLOBALS['_kint_settings']['enabled'] );
 
@@ -262,7 +262,7 @@ class Kint
 
 
 	/**
-	 * generic path display callback, can be configured in the settings; purpose is to show relevant path info and hide
+	 * generic path display callback, can be configured in the config; purpose is to show relevant path info and hide
 	 * as much of the path as possible.
 	 *
 	 * @param string $file

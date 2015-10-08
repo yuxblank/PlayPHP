@@ -1,0 +1,5 @@
+{"routes":[
+  {"method":"Frontend@index", "action":"GET"},
+  {"method":"Frontend@register", "action":"GET"},
+  {"method":"Frontend@blog", "action":"GET"}
+]}

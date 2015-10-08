@@ -1,5 +1,5 @@
 <?php
-require './settings.php';
+require './database.php';
 
     function router($controller,$action,$query_data="") {
     $param = is_array($query_data) ? http_build_query($query_data) : "$query_data";
