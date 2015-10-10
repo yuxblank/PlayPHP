@@ -33,32 +33,47 @@ class Router {
 
     public static function getInstance(){
         if (Router::$routes==null) {
-           Router::$routes = new Router();
+           new Router();
         }
+        return Router::$routes;
     }
 
     public static function go($action,$params=null) {
         $actions = explode("@", $action);
-        $controller = strtolower($actions[0]);
-        $action     = strtolower($actions[1]);
+        $c = strtolower($actions[0]);
+        $a     = strtolower($actions[1]);
         // set query sting to null
         $queryString = null;
-        $get = null;
         if(isset($params)) {
-            // deprecated
-            //$queryString = is_array($params) ? http_build_query($params) : "$params";
 
             foreach ($params as $name => $value) {
                 $queryString .= '/'.$name.'//'.$value;
             }
 
-            return APP_URL."$controller/$action$queryString";
+            return APP_URL."$c/$a$queryString";
         } 
-        return APP_URL."$controller/$action";
+        return APP_URL."$c/$a";
     }
     
+    
+     public static function checkRoutes($action,$method){
+         foreach (Router::getInstance()->routes as $valid) {
+          /*   echo $valid->action . ' == ' . $action . '|||';
+             echo $valid->method . ' == ' . $method . '|||';*/
+             if ($valid->method == $method && $valid->action == $action) {
+                 return true;
+             }
+         }
+     }
 
-        
+    public static function inverseRoute($controller,$action) {
+        return ucfirst($controller)."@".$action;
+    }
+    public static function notFound($action,$method) {
+
+        die("Route not found:: $action with method $method");
+
+    }
         
         
 
