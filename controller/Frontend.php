@@ -41,11 +41,11 @@ class Frontend extends PlayController {
         $this->template = new Template();
         $db = new Database();
         $obj = new BlogPost();
-        $current = isset($params['page']) ? $params['page'] : 0;
-        echo $current;
+        $current = isset($params->getGet()['page']) ? $params->getGet()['page'] : 0;
+       
         $items = $db->countObjects($obj);
         $pages = ceil($items/5);
-        $blogPosts = $db->findAll($obj, null, null, $current^2-1, 5+$current-1,"ORDER BY id ASC");
+        $blogPosts = $db->findAll($obj);
         $this->template->renderArgs("page_title","Blog");
         $this->template->renderArgs("pages",$pages);
         $this->template->renderArgs("posts", $blogPosts);

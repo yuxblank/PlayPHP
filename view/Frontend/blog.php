@@ -8,9 +8,11 @@
             <?php
             $html="";
             foreach ($posts as $post) {
+                $link = Router::go("BlogController@showPost",[ 'id' => $post->id ]);
                 $html.= "<div class='panel panel-default' style='padding:15px;'>"
                         . "<h1>$post->title</h1>"
                         . "<p>$post->text</p>"
+                        . "<p><a href='$link'>Read more...</a></p>"
                         . "</div>";
                 
             }
@@ -29,7 +31,7 @@
       <?php
       $html ="";
                   for ($i=1;$i<=$pages;$i++) {
-                      $get = router("Frontend", "blog", ["page" => $i]);
+                      $get = Router::go("Frontend@blog", ["page" => $i]);
                       $html.= "<li><a href='$get'>".$i."</a></li>";
                   }
                   echo $html;
@@ -53,7 +55,7 @@
         <h4 class="modal-title" id="myModalLabel">New Blog post</h4>
       </div>
       <div class="modal-body">
-          <form method="POST" action="<?php echo router("BlogController", "saveBlogPost")?>">
+          <form method="POST" action="<?php echo Router::go("BlogController@saveBlogPost")?>">
   <div class="form-group">
     <label for="title">Title</label>
     <input type="text" class="form-control" id="title" placeholder="Title..." name="title" required>

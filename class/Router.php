@@ -26,7 +26,7 @@ include 'config/app.php';
 require 'Class/http/Request.php';
 class Router {
     protected static $routes;
-
+    
     private function __construct() {
         Router::$routes = json_decode(file_get_contents(APP_ROOT.'config/routes.json'));
     }
@@ -42,36 +42,62 @@ class Router {
         $actions = explode("@", $action);
         $c = strtolower($actions[0]);
         $a     = strtolower($actions[1]);
+        
+        $url = Router::findUrl($action);
+        
         // set query sting to null
         $queryString = null;
         if(isset($params)) {
 
             foreach ($params as $name => $value) {
-                $queryString .= '/'.$name.'//'.$value;
+                $queryString .= '/'.$name.'/'.$value;
             }
 
-            return APP_URL."$c/$a$queryString";
+            return APP_URL."$url$queryString";
         } 
-        return APP_URL."$c/$a";
+        return APP_URL."$url";
     }
     
+    public static function switchAction($action,$params=null) {
+        $r = Router::go($action,$params);
+        header("location:$r", true, 302);
+    }
+    
+    public static function findUrl($action) {
+         foreach (Router::getInstance()->routes as $route) {
+             if ($route->action == $action) {
+                 return $route->url;
+             }
+         }
+    }
+    public static function findAction($url) {
+           foreach (Router::getInstance()->routes as $route) {
+             if ($route->url == $url) {
+                 return $route;
+             }
+         }
+    }
     
      public static function checkRoutes($action,$method){
          foreach (Router::getInstance()->routes as $valid) {
           /*   echo $valid->action . ' == ' . $action . '|||';
              echo $valid->method . ' == ' . $method . '|||';*/
              if ($valid->method == $method && $valid->action == $action) {
-                 return true;
+                 return $valid;
              }
          }
      }
-
-    public static function inverseRoute($controller,$action) {
-        return ucfirst($controller)."@".$action;
+     
+    public static function inverseRoute($action) {
+        return explode("@", $action->action);
     }
     public static function notFound($action,$method) {
 
-        die("Route not found:: $action with method $method");
+        if (APP_DEBUG) {
+        echo ("Route not found:: $action with method ". $method . "<br>");
+        d(Router::$routes);
+        }
+        
 
     }
         

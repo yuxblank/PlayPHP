@@ -17,9 +17,25 @@ class BlogController extends PlayController {
     private $template;
     
     public function saveBlogPost($params) {
-        $blogPost = new BlogPost(null,$params['title'], $params['text']);
+        $blogPost = new BlogPost(null,$params->getPost()['title'], $params->getPost()['text']);
         $db = new Database();
         $db->save($blogPost);
-        switchAction("Frontend", "blog");
+        Router::switchAction("Frontend@blog");
+        
     }
+    
+    public function showPost($params) {
+        $blogPost = new BlogPost ();
+        $db = new Database();
+        $this->template = new Template();
+        $post = $db->findById($blogPost,$params->getGet()['id']);
+        $this->template->renderArgs("post", $post );
+        $this->template->renderArgs("page_title", "Blog post: $post->title");
+        $this->template->render("Frontend", "post");
+        
+        
+    }
+    
+    
+    
 }

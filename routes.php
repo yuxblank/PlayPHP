@@ -1,11 +1,6 @@
 <?php
-require_once 'class/Sessions.php';
-require_once 'class/Template.php';
-require_once 'model/Products.php';
-require_once 'class/Database.php';
 
-
-/*
+/* 
  * Copyright (C) 2015 yuri.blanc
  *
  * This program is free software: you can redistribute it and/or modify
@@ -21,25 +16,3 @@ require_once 'class/Database.php';
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
-/**
- * Description of PlayController
- *
- * @author yuri.blanc
- */
-class PlayController {
-    
-    public function sessionStart () {
-        $session = new Sessions();
-        $session->init();
-    }
-    
-    public static function keep($flash,$data) {
-        $sessions = new Sessions();
-        $_SESSION['flash'] = array(
-            $flash => $data
-        );
-    }
-    
-    
-}
