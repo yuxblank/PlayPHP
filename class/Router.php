@@ -47,14 +47,14 @@ class Router {
         
         // set query sting to null
         $queryString = null;
-        if(isset($params)) {
+      /*  if(isset($params)) {
 
             foreach ($params as $name => $value) {
                 $queryString .= '/'.$name.'/'.$value;
             }
 
             return APP_URL."$url$queryString";
-        } 
+        } */
         return APP_URL."$url";
     }
     
@@ -70,9 +70,10 @@ class Router {
              }
          }
     }
-    public static function findAction($url) {
+    public static function findAction($query) {
+        d($query);
            foreach (Router::getInstance()->routes as $route) {
-             if ($route->url == $url) {
+             if ($route->url == $query) {
                  return $route;
              }
          }

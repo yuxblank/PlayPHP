@@ -3,7 +3,6 @@
   {"action":"Frontend@register", "method":"GET", "url" : "register"},
   {"action":"Frontend@blog", "method":"GET", "url" : "blog"},
   {"action":"admin/Admin@index", "method":"GET", "url" : "admin"},
-  {"action":"Frontend@register", "method":"POST", "url" : "register"},
   {"action" : "BlogController@saveBlogPost", "method" : "POST", "url" : "saveBlogItem"},
-  {"action" : "BlogController@showPost", "method" : "GET", "url" : "showPost/id/{id}"}
+  {"action" : "BlogController@showPost", "method" : "GET", "url" : "showPost/id/{}"}
 ]}

@@ -27,8 +27,7 @@ $uri = substr($_SERVER['REQUEST_URI'], strlen($basepath));
 //    $c = $route[0];
 //    // action
 //    $a = $route[1];
-    
-$redirect = Router::findAction($route[0]);
+$redirect = Router::findAction($paths);
 if ($redirect) {
 
     $rest = $_SERVER['REQUEST_METHOD'];
