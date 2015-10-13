@@ -43,19 +43,24 @@ class Router {
         $c = strtolower($actions[0]);
         $a     = strtolower($actions[1]);
         
-        $url = Router::findUrl($action);
+        $route = Router::findUrl($action);
         
         // set query sting to null
-        $queryString = null;
-      /*  if(isset($params)) {
 
-            foreach ($params as $name => $value) {
-                $queryString .= '/'.$name.'/'.$value;
+        if(isset($params)) {
+            $queryString = null;
+            /* foreach ($params as $name => $value) {
+                 $queryString .= '/'.$name.'/'.$value;
+             }*/
+            //$routeArray[] = array_search("?",explode("/",$route->url));
+            foreach ($params as $key => $value) {
+                $queryString = str_replace("?",$value,$route->url);
             }
 
-            return APP_URL."$url$queryString";
-        } */
-        return APP_URL."$url";
+
+            return APP_URL."$queryString";
+        } 
+        return APP_URL."$route->url";
     }
     
     public static function switchAction($action,$params=null) {
@@ -66,19 +71,51 @@ class Router {
     public static function findUrl($action) {
          foreach (Router::getInstance()->routes as $route) {
              if ($route->action == $action) {
-                 return $route->url;
-             }
-         }
-    }
-    public static function findAction($query) {
-        d($query);
-           foreach (Router::getInstance()->routes as $route) {
-             if ($route->url == $query) {
                  return $route;
              }
          }
     }
-    
+    public static function findAction($query) {
+        //d($query);
+        $queryArray = explode("/", $query);
+        //d($queryArray);
+           foreach (Router::getInstance()->routes as $route) {
+             if ($route->url == $query) {
+                 // replace current routes url with incoming url
+                 $route->url = $query;
+                 return $route;
+             } else {
+                 $queryReplace = null;
+                 foreach ($queryArray as $key => $value) {
+                     if (strpos($route->url,"?")) {
+                         $queryReplace = str_replace("?", $value, $route->url);
+                         if($queryReplace == $query) {
+                             $route->url = $query;
+                             return $route;
+                         }
+                     }
+                 }
+
+             }
+
+
+            /*     $routeUrl = explode("/",$route->url);
+                if (array_search ("?",$routeUrl)) {
+                    $index[] = array_search ("?",$routeUrl);
+                    for ($i=0;$i<count($queryArray);$i++) {
+                        $routeUrl[$i] = $queryArray[$i]; // ? --> data
+                    }
+                     $route->url = implode("/", $routeUrl);
+                    return $route;
+                }*/
+
+
+
+             }
+
+
+    }
+
      public static function checkRoutes($action,$method){
          foreach (Router::getInstance()->routes as $valid) {
           /*   echo $valid->action . ' == ' . $action . '|||';
