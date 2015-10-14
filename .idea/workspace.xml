@@ -2,73 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="49039dec-8300-471c-933e-4d01d5d31332" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/PlayPHP/class/Controller.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/composer.json" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\PlayPHP\.vscode\launch.json" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\PlayPHP\PlayPHP\class\PlayController.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\PlayPHP\controller\Registration.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\PlayPHP\libraries\3rdparty\kint\Kint.class.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\PlayPHP\libraries\3rdparty\kint\LICENCE" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\PlayPHP\libraries\3rdparty\kint\README.md" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\PlayPHP\libraries\3rdparty\kint\config.default.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\PlayPHP\libraries\3rdparty\kint\decorators\plain.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\PlayPHP\libraries\3rdparty\kint\decorators\rich.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\PlayPHP\libraries\3rdparty\kint\parsers\custom\classmethods.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\PlayPHP\libraries\3rdparty\kint\parsers\custom\classstatics.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\PlayPHP\libraries\3rdparty\kint\parsers\custom\color.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\PlayPHP\libraries\3rdparty\kint\parsers\custom\fspath.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\PlayPHP\libraries\3rdparty\kint\parsers\custom\json.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\PlayPHP\libraries\3rdparty\kint\parsers\custom\microtime.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\PlayPHP\libraries\3rdparty\kint\parsers\custom\objectiterateable.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\PlayPHP\libraries\3rdparty\kint\parsers\custom\splobjectstorage.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\PlayPHP\libraries\3rdparty\kint\parsers\custom\timestamp.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\PlayPHP\libraries\3rdparty\kint\parsers\custom\xml.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\PlayPHP\libraries\3rdparty\kint\parsers\objects\closure.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\PlayPHP\libraries\3rdparty\kint\parsers\objects\smarty.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\PlayPHP\libraries\3rdparty\kint\parsers\objects\splfileinfo.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\PlayPHP\libraries\3rdparty\kint\parsers\parser.class.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\PlayPHP\libraries\3rdparty\kint\view\base.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\PlayPHP\libraries\3rdparty\kint\view\base.less" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\PlayPHP\libraries\3rdparty\kint\view\compiled\aante-light.css" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\PlayPHP\libraries\3rdparty\kint\view\compiled\kint.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\PlayPHP\libraries\3rdparty\kint\view\compiled\original.css" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\PlayPHP\libraries\3rdparty\kint\view\compiled\solarized-dark.css" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\PlayPHP\libraries\3rdparty\kint\view\compiled\solarized.css" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\PlayPHP\libraries\3rdparty\kint\view\themes\aante-light.less" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\PlayPHP\libraries\3rdparty\kint\view\themes\original.less" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\PlayPHP\libraries\3rdparty\kint\view\themes\solarized-dark.less" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\PlayPHP\libraries\3rdparty\kint\view\themes\solarized.less" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\PlayPHP\libraries\Ajax.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\PlayPHP\libraries\Router.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\PlayPHP\libraries\js\ajax.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\PlayPHP\model\CostumerLicenses.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\PlayPHP\model\Customer.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\PlayPHP\model\DeviceRemoved.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\PlayPHP\model\Devices.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\PlayPHP\model\Licenses.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\PlayPHP\model\Products.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\PlayPHP\routes.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\PlayPHP\settings.php" afterPath="" />
-      <change type="MOVED" beforePath="C:\xampp\htdocs\PlayPHP\class\Assets\TemplateButtons.php" afterPath="$PROJECT_DIR$/PlayPHP/class/Assets/TemplateButtons.php" />
-      <change type="MOVED" beforePath="C:\xampp\htdocs\PlayPHP\class\Database.php" afterPath="$PROJECT_DIR$/PlayPHP/class/Database.php" />
-      <change type="MOVED" beforePath="C:\xampp\htdocs\PlayPHP\class\Messages.php" afterPath="$PROJECT_DIR$/PlayPHP/class/Messages.php" />
-      <change type="MOVED" beforePath="C:\xampp\htdocs\PlayPHP\class\ResizeImage.php" afterPath="$PROJECT_DIR$/PlayPHP/class/ResizeImage.php" />
-      <change type="MOVED" beforePath="C:\xampp\htdocs\PlayPHP\class\Router.php" afterPath="$PROJECT_DIR$/PlayPHP/class/Router.php" />
-      <change type="MOVED" beforePath="C:\xampp\htdocs\PlayPHP\class\Sessions.php" afterPath="$PROJECT_DIR$/PlayPHP/class/Sessions.php" />
-      <change type="MOVED" beforePath="C:\xampp\htdocs\PlayPHP\class\Template.php" afterPath="$PROJECT_DIR$/PlayPHP/class/View.php" />
-      <change type="MOVED" beforePath="C:\xampp\htdocs\PlayPHP\class\http\Get.php" afterPath="$PROJECT_DIR$/PlayPHP/class/http/Get.php" />
-      <change type="MOVED" beforePath="C:\xampp\htdocs\PlayPHP\class\http\Request.php" afterPath="$PROJECT_DIR$/PlayPHP/class/http/Request.php" />
-      <change type="MOVED" beforePath="C:\xampp\htdocs\PlayPHP\model\PlayModel.php" afterPath="$PROJECT_DIR$/PlayPHP/class/PlayModel.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/controller/Admin.php" afterPath="$PROJECT_DIR$/admin/controller/Admin.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/controller/BlogController.php" afterPath="$PROJECT_DIR$/controller/BlogController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/controller/Frontend.php" afterPath="$PROJECT_DIR$/controller/Frontend.php" />
+      <change type="DELETED" beforePath="C:\xampp\htdocs\PlayPHP\.idea\.name" afterPath="" />
+      <change type="DELETED" beforePath="C:\xampp\htdocs\PlayPHP\.idea\misc.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\xampp\htdocs\PlayPHP\.idea\modules.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\xampp\htdocs\PlayPHP\.idea\vcs.xml" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/PlayPHP.iml" afterPath="$PROJECT_DIR$/.idea/PlayPHP.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/controller/ProductsController.php" afterPath="$PROJECT_DIR$/admin/controller/ProductsController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/app.php" afterPath="$PROJECT_DIR$/config/app.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.php" afterPath="$PROJECT_DIR$/index.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/template/core/index.php" afterPath="$PROJECT_DIR$/template/core/index.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/php.xml" afterPath="$PROJECT_DIR$/.idea/php.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/routes.json" afterPath="$PROJECT_DIR$/config/routes.json" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="PlayPHP.iws" />
@@ -374,10 +313,10 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="22" width="1936" height="1066" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.26066098" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.26066098" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
