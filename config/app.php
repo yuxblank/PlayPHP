@@ -13,10 +13,10 @@ define ("TEMPLATE", "core");
 /**
  * ** DEBUG **
  */
-$debug = true;
+$debug = false;
 define('APP_DEBUG', $debug);
 if ($debug) {
-    require 'libraries/3rdparty/kint/Kint.class.php';
+
 //    Kint::dump( $_SERVER );
     // or, even easier, use a shorthand:
 //    d( $_SERVER );

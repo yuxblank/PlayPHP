@@ -49,7 +49,7 @@ class ProductsController extends PlayController {
         $db = new Database ();
         $id = $params['id'];
         $products = $db->findById($products, $id); // auto Bind object fetched=no and POST params?
-        $this->template = new Template();
+        $this->template = new View();
         $this->template->renderArgs("product", $products);
         $this->template->renderArgs("page_title", "Edit product " . $products->title);
         $this->template->render(get_class($this), "editProducts");

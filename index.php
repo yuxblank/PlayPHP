@@ -1,7 +1,8 @@
 <?php
-require 'controller/Frontend.php';
-require 'Class/Router.php';
-
+error_reporting( E_ALL & ~( E_NOTICE | E_STRICT | E_DEPRECATED ) );
+include_once 'controller/Frontend.php';
+include_once 'PlayPHP/class/Router.php';
+include_once 'PlayPHP/class/http/Request.php';
 //require 'libraries/Router.php';
 /*
  * ** ROUTING SETTINGS **
@@ -12,8 +13,6 @@ define("APP_URL",$app_url);
 define("APP_ROOT",$app_root);
 
 
-
-
 $basepath = implode('/', array_slice(explode('/', $_SERVER['SCRIPT_NAME']), 0, -1));
 $uri = substr($_SERVER['REQUEST_URI'], strlen($basepath));
 
@@ -22,11 +21,8 @@ $uri = substr($_SERVER['REQUEST_URI'], strlen($basepath));
     //$paths = explode("/", $uri);
     $paths = parse_url($root, PHP_URL_PATH);
     $route = explode("/",$paths);
-    $request = new \PlayPhp\Classes\Request();
-//    // controller
-//    $c = $route[0];
-//    // action
-//    $a = $route[1];
+    $request = new Request();
+        
 $redirect = Router::findAction($paths);
 if ($redirect) {
 
@@ -45,14 +41,18 @@ if ($redirect) {
             } else {
                 Router::notFound($redirect->action,"POST");
             }
+        break;
         case 'GET':
             if (Router::checkRoutes($redirect->action, "GET")) {
                //preg_match("[\d-aA-zZ\/]+", $app_root); // drop {}
+                    
                 for ($i = 1; $i < count($route); $i++) {
+                    // TODO odd routes should trow an exception
                     $request->setGet($route[$i], $route[++$i]);
+           
                 }
-                
                 break;
+                
             } else {
                 Router::notFound($redirect->action,"GET");
             }

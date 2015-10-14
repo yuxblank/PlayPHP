@@ -4,5 +4,7 @@
   {"action":"Frontend@blog", "method":"GET", "url" : "blog"},
   {"action":"admin/Admin@index", "method":"GET", "url" : "admin"},
   {"action" : "BlogController@saveBlogPost", "method" : "POST", "url" : "saveBlogItem"},
-  {"action" : "BlogController@showPost", "method" : "GET", "url" : "showPost/id/?"}
+  {"action" : "BlogController@showPost", "method" : "GET", "url" : "showPost/id/?"},
+  {"action" : "Frontend@login", "method" : "GET", "url" : "login"},
+  {"action" : "Frontend@authenticate", "method" : "POST", "url" : "authenticate"}
 ]}

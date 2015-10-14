@@ -14,6 +14,13 @@ and open the template in the editor.
         </head>
     <body>
         <div class="container">
+            <?php 
+            if (isset($_COOKIE['test'])) {
+              echo $_COOKIE['test'];   
+            }
+            
+            
+             ?>
             <div class="row">
                 <nav class="navbar navbar-default">
   <div class="container-fluid">
@@ -34,6 +41,7 @@ and open the template in the editor.
           <li> <a href="<?php echo APP_URL ?>">Home</a> </li>
         <li> <a href="<?php echo Router::go("Frontend@register")?>">Register</a> </li>
         <li> <a href="<?php echo Router::go("Frontend@blog") ?>">Blog</a> </li>
+         <li> <a href="<?php echo Router::go("Frontend@login") ?>">Login</a> </li>
       </ul>
 </nav>
                 <div class="page-header text-center">

@@ -1,5 +1,5 @@
 <?php
-require './class/PlayController.php';
+require './PlayPHP/class/Controller.php';
 require './model/BlogPost.php';
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -12,33 +12,53 @@ require './model/BlogPost.php';
  *
  * @author yuri.blanc
  */
-class Frontend extends PlayController {
-    private $template;
+class Frontend extends Controller {
+ 
     
     public function index() {
-        $this->template = new Template();
+        $view = new \PlayPhp\Classes\View();
         $bottom = array(
             'bottom' => array(
                 'bottom_title' => 'titolo1',
                 'bottom_text' => 'testo1'
         )
         );
-        $this->template->renderArgs("bottom", $bottom);
-        $this->template->renderArgs("page_title","Welcome");
-        $this->template->render(get_class($this), "index", "Welcome");
+        $view->renderArgs("bottom", $bottom);
+        $view->renderArgs("page_title","Welcome");
+        $view->render(get_class($this), "index", "Welcome");
 
     }
     public function login() {
+        $view =  new \PlayPhp\Classes\View();
+        $view->renderArgs("page_title","Login");
+        $view->render(get_class($this), "login");
         
     }
+    
+    public function authenticate($params) {
+       if (isset($params->getPost()['username']) && isset($params->getPost()['password'])) {
+           $username = $params->getPost()['username'];
+           $password = $params->getPost()['password'];
+           
+           if ($username == "admin" && $password == "pass") {
+                  $this->keep("test", "ciao");
+
+//                setcookie("test", "ciao");
+               Router::switchAction("Frontend@index");
+           }
+       }
+    }
+    
+    
     public function register() {
-        $this->template = new Template();
-        $this->template->renderArgs("page_title","Register");
-        $this->template->render(get_class($this), "register", "Registra");
+        $view =  new \PlayPhp\Classes\View();
+        $view->renderArgs("page_title","Register");
+        $view->render(get_class($this), "register", "Registra");
+        
     }
     
     public function blog($params) {
-        $this->template = new Template();
+        $view =  new \PlayPhp\Classes\View();
         $db = new Database();
         $obj = new BlogPost();
         $current = isset($params->getGet()['page']) ? $params->getGet()['page'] : 0;
@@ -46,9 +66,9 @@ class Frontend extends PlayController {
         $items = $db->countObjects($obj);
         $pages = ceil($items/5);
         $blogPosts = $db->findAll($obj);
-        $this->template->renderArgs("page_title","Blog");
-        $this->template->renderArgs("pages",$pages);
-        $this->template->renderArgs("posts", $blogPosts);
-        $this->template->render(get_class($this), "blog");
+        $view->renderArgs("page_title","Blog");
+        $view->renderArgs("pages",$pages);
+        $view->renderArgs("posts", $blogPosts);
+        $view->render(get_class($this), "blog");
     }
 }

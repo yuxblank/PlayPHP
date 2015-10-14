@@ -20,7 +20,7 @@ class Admin extends PlayController {
     
     
     public function index() {  
-        $this->template = new Template();
+        $this->template = new View();
         $this->template->renderArgs("page_title", "Administrator Area");
         $this->template->render(get_class($this), "index", "Admin Control Panel");
         $this->sessionStart();
@@ -30,7 +30,7 @@ class Admin extends PlayController {
         $db = new Database();
         $productsArray = $db->findAll($products);
 //        $productsArray = $products->findAll($products);
-        $template = new Template();
+        $template = new View();
         $template->renderArgs("page_title", "Products Manager");
         $template->renderArgs("products", $productsArray);
         $template->render(get_class($this), "products", "Products manager");   
