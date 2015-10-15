@@ -15,8 +15,8 @@ and open the template in the editor.
     <body>
         <div class="container">
             <?php 
-            if (isset($_COOKIE['test'])) {
-              echo $_COOKIE['test'];   
+            if (isset($_COOKIE['error'])) {
+              echo $_COOKIE['error'];
             }
             
             

@@ -22,31 +22,55 @@
  * @author yuri.blanc
  */
 class Sessions {
+    private $token;
     private $lifetime;// = SESSION_LIFETIME;
     
-    public function init() {
-        $data = "test";
-            if(session_start()) {
-             
-                $_SESSION['TOKEN'] = $this->createToken($data);
-                echo "session id: ".session_id()."</br>";
-                echo "session token: ".$_SESSION['TOKEN'];
-            } else {
-                //error
-            }
-            return $_SESSION['TOKEN'];
+    function __construct() {
         
     }
     
+    public function setSession($name, $object){
+        $this->init();
+        if ($this->checkValidity($this->token)) {
+            $_SESSION[$name] = $object;
+        }
+        
+    }
+    
+    public function getSession($name) {
+        $this->init();
+        if($this->checkValidity($this->token)) {
+            return $_SESSION[$name];
+        }
+        else {
+            echo "unvalid token<br>";
+        }
+    }
+    
+
+    
+    private function init() {
+            if(!session_id()) {
+                session_start();
+                $this->token =  $_SESSION['TOKEN'] = $this->createToken();
+                //echo "session id: ".session_id()."<br>";
+                // echo "session token: ".$_SESSION['TOKEN']."<br>";
+            } else {
+                //echo "session already set<br>";
+            }
+    }
+    
     public function checkValidity($token) {
-        if ($_SESSION['TOKEN']== $token) {
+        if ($this->token == $token) {
             return true;
-        } 
-        return false;
+        } else {
+            die("unvalid token");
+            //return false;
+        }
     }
     
     public function stop(){
-        session_destroy();
+        session_unset();
     }
     
     
@@ -57,6 +81,14 @@ class Sessions {
     }
     
     
+    function getToken() {
+        return $this->token;
+    }
+
+    function setToken($token) {
+        $this->token = $token;
+    }
+
 
         
 

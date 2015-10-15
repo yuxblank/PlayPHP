@@ -26,16 +26,28 @@ require_once 'Database.php';
  * @author yuri.blanc
  */
 class Controller {
-
-    
+    private static $session;
     public function __construct() {
         
     }
     
+    public static function getInstance() {
+        if (self::$session == null) {
+            self::$session = new Sessions ();
+        }
+        return self::$session;
+    }
     
-    public function sessionStart () {
-        $session = new Sessions();
-        $session->init();
+    public static function setSession($name, $object) {
+        
+        self::getInstance()->setSession($name, $object);
+    }
+    
+    public static function getSession($name) {
+        return self::getInstance()->getSession($name);
+    }
+    public static function stopSession() {
+        self::getInstance()->stop();
     }
 
     /**

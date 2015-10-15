@@ -17,14 +17,24 @@ class BlogController extends Controller {
     private $template;
     
     public function saveBlogPost($params) {
-        $blogPost = new BlogPost(null,$params->getPost()['title'], $params->getPost()['text']);
-        $db = new Database();
-        $db->save($blogPost);
+        
+        if(Controller::getSession("user") == "admin") {
+
+
+            $blogPost = new BlogPost(null, $params->getPost()['title'], $params->getPost()['text']);
+            $db = new Database();
+            $db->save($blogPost);
+
+
+        } else {
+            Controller::keep("error", "NOT LOGGED IN");
+        }
         Router::switchAction("Frontend@blog");
         
     }
     
     public function showPost($params) {
+
         $blogPost = new BlogPost ();
         $db = new Database();
         $this->template = new \PlayPhp\Classes\View();

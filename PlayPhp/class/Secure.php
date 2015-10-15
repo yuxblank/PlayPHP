@@ -1,5 +1,5 @@
 <?php
-
+require 'Controller.php';
 /*
  * Copyright (C) 2015 yuri.blanc
  *
@@ -23,8 +23,10 @@
  *
  * @author yuri.blanc
  */
-class Secure extends \PlayController {
-        
+class Secure extends Controller {
+    
+
+
    
     
 }

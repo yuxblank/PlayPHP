@@ -42,9 +42,9 @@ class Frontend extends Controller {
            
            if ($username == "admin" && $password == "pass") {
                   $this->keep("test", "ciao");
-
+                  Controller::setSession("user", "admin");
 //                setcookie("test", "ciao");
-               Router::switchAction("Frontend@index");
+                  Router::switchAction("Frontend@blog");
            }
        }
     }
@@ -58,6 +58,7 @@ class Frontend extends Controller {
     }
     
     public function blog($params) {
+        echo Controller::getSession("user");
         $view =  new \PlayPhp\Classes\View();
         $db = new Database();
         $obj = new BlogPost();
