@@ -31,7 +31,7 @@ class Controller {
         
     }
     
-    public static function getInstance() {
+    public static function getSessionInstance() {
         if (self::$session == null) {
             self::$session = new Sessions ();
         }
@@ -40,14 +40,14 @@ class Controller {
     
     public static function setSession($name, $object) {
         
-        self::getInstance()->setSession($name, $object);
+        self::getSessionInstance()->setSession($name, $object);
     }
     
     public static function getSession($name) {
-        return self::getInstance()->getSession($name);
+        return self::getSessionInstance()->getSession($name);
     }
     public static function stopSession() {
-        self::getInstance()->stop();
+        self::getSessionInstance()->stop();
     }
 
     /**
