@@ -1,12 +1,12 @@
 
             <div class="container-fluid">
                     <div class="container container-center col-xs-8 col-xs-offset-2">
-                        <form>
+                        <form method='POST' action='<?php Router::findUrl("Frontend@register") ?>'>
                             <div class="form-group">
-                                <label for="exampleInputEmail1">Email address</label>
-                                <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email" required>
-                                <label for="exampleInputEmail1">Challenge</label>
-                                <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Challenge" required>
+                                <label for="username">username</label>
+                                <input type="text" class="form-control" id="username" placeholder="username" name='username' required>
+                                <label for="password">password</label>
+                                <input type="password" class="form-control" id="password" placeholder="password" name='password' required>
                             </div>
                             <div class="checkbox">
                                 <label>

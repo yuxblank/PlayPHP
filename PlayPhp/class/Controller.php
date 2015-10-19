@@ -64,6 +64,18 @@ class Controller {
         setcookie($name, $value, $expire);
     
     }
+    
+    
+    
+     /**
+     * 
+     * @param array $data
+     * @param const $options
+     */
+    public static function renderJSON($data, $options=null) {
+        header('Content-Type: application/json');
+        echo json_encode($data, $options);
+    }
 
 
 

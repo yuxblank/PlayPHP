@@ -39,41 +39,37 @@ class Router {
     }
 
     public static function go($action,$params=null) {
-        $actions = explode("@", $action);
-        $c = strtolower($actions[0]);
-        $a     = strtolower($actions[1]);
+//        $actions = explode("@", $action);
+//        $c = strtolower($actions[0]);
+//        $a     = strtolower($actions[1]);
         
         $route = Router::findUrl($action);
        
         // set query sting to null
 
         if ($route) {
-        
             if(isset($params)) {
                 $queryString = null;
-                /* foreach ($params as $name => $value) {
-                     $queryString .= '/'.$name.'/'.$value;
-                 }*/
-                //$routeArray[] = array_search("?",explode("/",$route->url));
-
                     foreach ($params as $key => $value) {
                         $queryString = str_replace("?",$value,$route->url);
                     }
-
-
-
                 return APP_URL."$queryString";
             } 
             
         return  APP_URL."$route->url";
         } else {
-            return  APP_URL."NOT_FOUND";
+            return  APP_URL."404";
         }
     }
     
     public static function switchAction($action,$params=null) {
         $r = Router::go($action,$params);
         header("location:$r", true, 302);
+    }
+    
+    public static function redirect($url){
+        $action = Router::findAction($url);
+        self::switchAction($action);
     }
     
     public static function findUrl($action) {

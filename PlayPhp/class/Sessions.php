@@ -70,7 +70,9 @@ class Sessions {
     }
     
     public function stop(){
+        $this->init();
         session_unset();
+     
     }
     
     
@@ -88,9 +90,6 @@ class Sessions {
     function setToken($token) {
         $this->token = $token;
     }
-
-
-        
 
    
 }

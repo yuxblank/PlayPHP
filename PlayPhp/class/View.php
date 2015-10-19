@@ -29,14 +29,18 @@ class View {
         $this->var[$name] = $value;
     }
     
-    public function render($controller, $view) {
-        $ctrl = strtolower($controller);
-        $this->page_content = $this->view = APP_ROOT."/view/$ctrl/$view.php";
+    public function render($view) {
+        $this->page_content = $this->view = APP_ROOT."/view/$view.php";
         $this->renderArgs("template", $this->template);
         $this->renderArgs("page_content", $this->page_content);
         extract($this->var);
         include APP_ROOT."template/$this->template/index.php";
     }
+    
+    public function renderJson($data,$options=null) {
+         echo json_encode($data,$options);
+    }
+    
     /**
      * 
      * @param string $type

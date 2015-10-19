@@ -24,8 +24,50 @@ require 'Controller.php';
  * @author yuri.blanc
  */
 class Secure extends Controller {
-    
+    private static $cripto;
+    public function __construct() {
+        parent::__construct();
+    }
 
+    public static function getSession($name) {
+        return parent::getSession($name);
+    }
+
+    public static function getSessionInstance() {
+        return parent::getSessionInstance();
+    }
+
+    public static function keep($name, $value, $expire = null) {
+        parent::keep($name, $value, $expire);
+    }
+
+    public static function renderJSON($data, $options = null) {
+        parent::renderJSON($data, $options);
+    }
+
+    public static function setSession($name, $object) {
+        parent::setSession($name, $object);
+    }
+
+    public static function stopSession() {
+        parent::stopSession();
+    }
+    
+    
+    
+    private static function Crypto() {
+        if (self::$cripto == null) {
+            self::$cripto = new \PlayPHP\Classes\Security\Crypto();
+        }
+        return self::$cripto;
+    }
+    public static function encryptPassword($password) {
+        return self::Crypto()->generateHash($password);
+    }
+    
+    public static function comparePassword($password,$string) {
+        return self::Crypto()->checkHash($password,$string);
+    }
 
    
     

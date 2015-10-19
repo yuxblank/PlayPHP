@@ -41,7 +41,7 @@ class BlogController extends Controller {
         $post = $db->findById($blogPost,$params->getGet()['id']);
         $this->template->renderArgs("post", $post );
         $this->template->renderArgs("page_title", "Blog post: $post->title");
-        $this->template->render("Frontend", "post");
+        $this->template->render("Frontend/post");
         
         
     }

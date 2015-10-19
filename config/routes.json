@@ -1,10 +1,14 @@
 {"routes":[
   {"action":"Frontend@index", "method":"GET", "url" : ""},
+  {"action":"Frontend@register", "method":"POST", "url" : "register"},
   {"action":"Frontend@register", "method":"GET", "url" : "register"},
   {"action":"Frontend@blog", "method":"GET", "url" : "blog"},
   {"action":"admin/Admin@index", "method":"GET", "url" : "admin"},
   {"action" : "BlogController@saveBlogPost", "method" : "POST", "url" : "saveBlogItem"},
   {"action" : "BlogController@showPost", "method" : "GET", "url" : "showPost/id/?"},
   {"action" : "Frontend@login", "method" : "GET", "url" : "login"},
-  {"action" : "Frontend@authenticate", "method" : "POST", "url" : "authenticate"}
+  {"action" : "Frontend@logout", "method" : "GET", "url" : "logout"},
+  {"action" : "Frontend@authenticate", "method" : "POST", "url" : "authenticate"},
+  {"action" : "Frontend@authenticateAjax", "method" : "POST", "url" : "authenticateAjax"},
+  {"action" : "Frontend@page404", "method" : "GET", "url" : "404"}
 ]}

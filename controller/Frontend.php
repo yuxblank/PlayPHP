@@ -1,18 +1,16 @@
 <?php
-require './PlayPHP/class/Controller.php';
+//require './PlayPHP/class/Controller.php';
+require './PlayPHP/class/Secure.php';
 require './model/BlogPost.php';
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+require './model/Users.php';
+require './PlayPHP/class/security/Crypto.php';
 
 /**
  * Description of Frontend
  *
  * @author yuri.blanc
  */
-class Frontend extends Controller {
+class Frontend extends Secure {
  
     
     public function index() {
@@ -25,13 +23,23 @@ class Frontend extends Controller {
         );
         $view->renderArgs("bottom", $bottom);
         $view->renderArgs("page_title","Welcome");
-        $view->render(get_class($this), "index", "Welcome");
+        $view->render("Frontend/index");
 
     }
     public function login() {
+        if (Controller::getSession('user')==null) {
+            
         $view =  new \PlayPhp\Classes\View();
         $view->renderArgs("page_title","Login");
-        $view->render(get_class($this), "login");
+        $view->render("Frontend/login");
+        } else {
+            Controller::keep("error", "Already logged in");
+            Router::switchAction('Frontend@blog');
+        }
+    }
+    public function logout() {
+        Controller::stopSession();
+        Router::switchAction("Frontend@login");
         
     }
     
@@ -39,7 +47,11 @@ class Frontend extends Controller {
        if (isset($params->getPost()['username']) && isset($params->getPost()['password'])) {
            $username = $params->getPost()['username'];
            $password = $params->getPost()['password'];
+           $user = new Users();
+           $db = new Database(); 
+       
            
+           $db->find($user, "WHERE username=? AND pass=?", $params);
            if ($username == "admin" && $password == "pass") {
                   $this->keep("test", "ciao");
                   Controller::setSession("user", "admin");
@@ -49,16 +61,51 @@ class Frontend extends Controller {
        }
     }
     
+    public function authenticateAjax($params){
+
+        
+        if (isset($params->getPost()['username']) && isset($params->getPost()['password'])) {
+           $username = $params->getPost()['username'];
+           $password = $params->getPost()['password'];
+           
+           $user = new Users();
+           $db = new Database(); 
+           $dbUser = $db->find($user, "WHERE username=? AND password=?", array($username, Secure::encryptPassword($password)));
+           if ($dbUser) {
+                    Controller::setSession("user", $username);
+//                  Controller::renderJSON("OK");
+                    echo "OK";
+           } else {
+               echo "k/o";
+           }
+       }
+    }
     
-    public function register() {
-        $view =  new \PlayPhp\Classes\View();
-        $view->renderArgs("page_title","Register");
-        $view->render(get_class($this), "register", "Registra");
+    
+    public function register($params) {
+        
+        if (Controller::getSession('user')==null && $params->getPost()==null) {
+            $view =  new \PlayPhp\Classes\View();
+            $view->renderArgs("page_title","Register");
+            $view->render("Frontend/register");
+    } else if ($params->getPost()['username']!=null && $params->getPost()['password']!=null) {
+            $username = $params->getPost()['username'];
+            $password = sha1($params->getPost()['password']);  
+            $user = new Users($username, $password);
+            $db = new Database();
+            $db->save($user);
+            Controller::keep("error", "Thank you for registering, now you can login");
+            Router::switchAction("Frontend@login");
+        } else {
+            Controller::keep("error", "You are already logged in");
+            Router::switchAction("Frontend@index");
+        }
         
     }
     
+    
     public function blog($params) {
-        echo Controller::getSession("user");
+     
         $view =  new \PlayPhp\Classes\View();
         $db = new Database();
         $obj = new BlogPost();
@@ -70,6 +117,10 @@ class Frontend extends Controller {
         $view->renderArgs("page_title","Blog");
         $view->renderArgs("pages",$pages);
         $view->renderArgs("posts", $blogPosts);
-        $view->render(get_class($this), "blog");
+        $view->render("Frontend/blog");
+    }
+    
+    public function page404() {
+        echo "PAGINA 404";
     }
 }

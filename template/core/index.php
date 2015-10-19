@@ -14,13 +14,6 @@ and open the template in the editor.
         </head>
     <body>
         <div class="container">
-            <?php 
-            if (isset($_COOKIE['error'])) {
-              echo $_COOKIE['error'];
-            }
-            
-            
-             ?>
             <div class="row">
                 <nav class="navbar navbar-default">
   <div class="container-fluid">
@@ -42,8 +35,24 @@ and open the template in the editor.
         <li> <a href="<?php echo Router::go("Frontend@register")?>">Register</a> </li>
         <li> <a href="<?php echo Router::go("Frontend@blog") ?>">Blog</a> </li>
          <li> <a href="<?php echo Router::go("Frontend@login") ?>">Login</a> </li>
+         <?php if (Controller::getSession("user")!=null) { ?>
+         <li> <button class="btn btn-default navbar-btn" onclick="window.location.replace('<?php echo Router::go("Frontend@logout") ?> ')">Logout</button> </li>
+         <?php } ?>
       </ul>
-</nav>
+</nav>    
+                 <?php if (isset($_COOKIE['error'])) { ?>
+                    <div class='alert alert-dismissable alert-danger yx-notify' role='alert'>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <?php echo $_COOKIE['error']; ?>
+                    </div>
+                 <?php } ?>
+                
+                
+                <!-- notify ajax -->
+                <div class='alert alert-dismissable alert-danger yx-notify-ajax' role='alert' style="display:none">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    </div>
+               <!-- end notify ajax -->
                 <div class="page-header text-center">
                     <h1><?php echo $page_title ?></h1>
                 </div>
@@ -76,5 +85,9 @@ and open the template in the editor.
                 </div>
             </div>
         </div>
+    <script>
+    
+    
+    </script>
     </body>
 </html>

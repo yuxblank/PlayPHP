@@ -18,7 +18,7 @@
  */
 
 ?>
-<form action="<?php echo Router::go("Frontend@authenticate") ?>" method="POST">
+<form>
   <div class="form-group">
     <label for="username">Username</label>
     <input type="username" class="form-control" id="username" placeholder="Username..." name="username">
@@ -28,5 +28,32 @@
     <input type="password" class="form-control" id="password" placeholder="Password..." name="password">
   </div>
 
-  <button type="submit" class="btn btn-default">Submit</button>
+  <button type="button" id='loginsubmit' class="btn btn-default">Submit</button>
 </form>
+
+<script>
+ $('#loginsubmit').on('click', function(){
+    
+var request = $.ajax({
+  url: "<?php echo Router::go('Frontend@authenticateAjax') ?>",
+  type: "POST",
+  data: $('form').serialize()
+ // dataType: "html"
+});
+
+request.done(function(msg) {
+  if (msg==='OK') {
+      window.location.replace('blog');
+  } else {
+      $('.yx-notify-ajax').show().text('invalid login')
+      $('input').val('');
+      $('.yx-notify-ajax').delay(2000).fadeOut(500);
+ }  
+});
+
+request.fail(function(jqXHR, textStatus) {
+  alert( "Request failed: " + textStatus );
+});
+    
+});
+</script>
