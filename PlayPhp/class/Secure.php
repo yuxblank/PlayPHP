@@ -19,7 +19,8 @@ require 'Controller.php';
 
 
 /**
- * Description of newPHPClass
+ * Secure is a sub-class of Controller. it adds some security methods and dependecies. 
+ * When your controller needs to use authentications or data encryption, extend your controller with Secure.
  *
  * @author yuri.blanc
  */
@@ -54,17 +55,30 @@ class Secure extends Controller {
     }
     
     
-    
+    /**
+     * Return an instance of Crypto class.
+     * @return Crypto
+     */
     private static function Crypto() {
         if (self::$cripto == null) {
             self::$cripto = new \PlayPHP\Classes\Security\Crypto();
         }
         return self::$cripto;
     }
+    /**
+     * Encrypt a password string 
+     * @param string $password
+     * @return string
+     */
     public static function encryptPassword($password) {
         return self::Crypto()->generateHash($password);
     }
-    
+    /**
+     * 
+     * @param string $password
+     * @param string $string
+     * @return Crypto
+     */
     public static function comparePassword($password,$string) {
         return self::Crypto()->checkHash($password,$string);
     }

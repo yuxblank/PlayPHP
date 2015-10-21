@@ -18,60 +18,88 @@ include './config/app.php';
  */
 
 /**
- * Description of router
- *
+ * This class provides routing methods for index.php. Some methods can be used also externally for inverse routing and url
+ * retrive echoing the output. 
  * @author yuri.blanc
+ * @copyright (c) 2015, Yuri Blanc
+ * @since 0.1
  */
 require 'http/Request.php';
 
 class Router {
     protected static $routes;
-    
+    /**
+     * Costructor reads the routes.json file as a stdClass();
+     */
     private function __construct() {
         Router::$routes = json_decode(file_get_contents(APP_ROOT.'config/routes.json'));
     }
-
+    /**
+     * Return stdClass respresentation of routes.json
+     * @return Router
+     */
     public static function getInstance(){
         if (Router::$routes==null) {
            new Router();
         }
         return Router::$routes;
     }
-
-    public static function go($action,$params=null) {
-//        $actions = explode("@", $action);
-//        $c = strtolower($actions[0]);
-//        $a     = strtolower($actions[1]);
+    /**
+     * The method returns the route URL from a action string params pointing to the controller and action.
+     * The $action must be present in routes or it returns 404 (not found).
+     * $params if set, must contain an associative array of GET query string. (e.x. ['id' => 'number']). 
+     * @static
+     * @param string $action
+     * @param mixed[] $params
+     * @return string
+     */
+    public static function go($action, $params = null) {
         
         $route = Router::findUrl($action);
-       
-        // set query sting to null
-
         if ($route) {
-            if(isset($params)) {
+            // case with N params
+            if (isset($params)) {
                 $queryString = null;
-                    foreach ($params as $key => $value) {
-                        $queryString = str_replace("?",$value,$route->url);
-                    }
-                return APP_URL."$queryString";
-            } 
-            
-        return  APP_URL."$route->url";
+                // replace each ? with the current params in order
+                foreach ($params as $key => $value) {
+                    $queryString = str_replace("?", $value, $route->url);
+                }
+                // return queryString url
+                return APP_URL . "$queryString";
+            }
+            // return url from json
+            return APP_URL . "$route->url";
         } else {
-            return  APP_URL."404";
+            // not found, return /404
+            return APP_URL . "404";
         }
     }
-    
+    /**
+     * Redirect (302) to another action from an action.
+     * @static
+     * @param string $action
+     * @param mixed[] $params
+     */
     public static function switchAction($action,$params=null) {
         $r = Router::go($action,$params);
         header("location:$r", true, 302);
     }
-    
+    /**
+     * Redirect (302) to another action from an url.
+     * @static
+     * @param string $action
+     * @param mixed[] $params
+     */
     public static function redirect($url){
         $action = Router::findAction($url);
         self::switchAction($action);
     }
-    
+    /**
+     * Find the url in routes from an action
+     * @static
+     * @param string $action
+     * @return stdClass
+     */
     public static function findUrl($action) {
          foreach (Router::getInstance()->routes as $route) {
              if ($route->action == $action) {
@@ -79,48 +107,50 @@ class Router {
              }
          }
     }
+    /**
+     * Read the real URL and check if exist in routes. If the route contains ? wildcards, try to replace them with current values and check for match.
+     * if no indentical urls are found, returns 404.
+     * @static
+     * @param string $query
+     * @return stdClass
+     */
     public static function findAction($query) {
-        //d($query);
+
         $queryArray = explode("/", $query);
-        //d($queryArray);
-           foreach (Router::getInstance()->routes as $route) {
-             if ($route->url == $query) {
-                 // replace current routes url with incoming url
-                 $route->url = $query;
-                 return $route;
-             } else {
-                 $queryReplace = null;
-                 foreach ($queryArray as $key => $value) {
-                     if (strpos($route->url,"?")) {
-                         $queryReplace = str_replace("?", $value, $route->url);
-                         if($queryReplace == $query) {
-                             $route->url = $query;
-                             return $route;
-                         }
-                     }
-                 }
-
-             }
-
-
-            /*     $routeUrl = explode("/",$route->url);
-                if (array_search ("?",$routeUrl)) {
-                    $index[] = array_search ("?",$routeUrl);
-                    for ($i=0;$i<count($queryArray);$i++) {
-                        $routeUrl[$i] = $queryArray[$i]; // ? --> data
+     
+        foreach (Router::getInstance()->routes as $route) {
+            if ($route->url == $query) {
+                // replace current routes url with incoming url
+                $route->url = $query;
+                return $route;
+            } else {
+                $queryReplace = null;
+                foreach ($queryArray as $key => $value) {
+                    if (strpos($route->url, "?")) {
+                        $queryReplace = str_replace("?", $value, $route->url);
+                        if ($queryReplace == $query) {
+                            $route->url = $query;
+                            return $route;
+                        }
                     }
-                     $route->url = implode("/", $routeUrl);
-                    return $route;
-                }*/
+                }
+            }
+        }
 
-
-
-             }
-
-
+        // never found
+        if (!$queryReplace) {
+            $route->url = "404";
+            return $route;
+        }
     }
-
-     public static function checkRoutes($action,$method){
+    /**
+     * Performs a check for a valid action and method in routes. if action and method belongs to a route returns the route.
+     * @static
+     * @param string $action
+     * @param string $method
+     * @return stdClass
+     */
+    public static function checkRoutes($action,$method){
          foreach (Router::getInstance()->routes as $valid) {
           /*   echo $valid->action . ' == ' . $action . '|||';
              echo $valid->method . ' == ' . $method . '|||';*/
@@ -129,21 +159,25 @@ class Router {
              }
          }
      }
-     
+    /**
+     * Performs a inverse route returning returning an array with [0 => 'Controller', 1 => 'action']
+     * @param string $action
+     * @return mixed[]
+     */
     public static function inverseRoute($action) {
         return explode("@", $action->action);
     }
-    public static function notFound($action,$method) {
-
+    
+    /**
+     * Performs a 404 not found
+     * @static
+     * @param string $action
+     * @param string $method
+     */
+    public static function notFound($action, $method) {
         if (APP_DEBUG) {
-        die ("Route not found:: $action with method ". $method . "<br>");
-//        d(Router::$routes);
+            die("Route not found:: $action with method " . $method . "<br>");
         }
-        
-
     }
-  
-        
-        
 
 }

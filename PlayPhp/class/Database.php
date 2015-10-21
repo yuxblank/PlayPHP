@@ -1,5 +1,6 @@
 <?php
 include './config/database.php';
+
 //use Exception;
 
 //use PDO;
@@ -43,7 +44,7 @@ class Database {
      * @param Array $params names of placeholders
      * @param Array $params placeholders values
      */
-    public function query($statement) {
+    private function query($statement) {
        $stm = $this->pdo->prepare($statement);
        $this->stm = $stm;
     }
@@ -52,7 +53,7 @@ class Database {
      * @param mixed $param
      * @param mixed $value
      */
-    public function bindValue ($param, $value) {
+    private function bindValue ($param, $value) {
         $this->stm->bindParam($param,$value);
     }
     
@@ -88,7 +89,7 @@ class Database {
         $table = $this->objectInjector($object);
         } catch (Exception $e) {
             if (APP_DEBUG) {
-                d($e->getTrace());
+                print_r($e->getTrace());
             }
             return;
         }
@@ -148,8 +149,8 @@ class Database {
         }
         $this->stm = $this->pdo->prepare($statement);
         $lastValue = 0;
-        if ($query && $values){
-            foreach ($query as $key => $value) {
+        if (isset($query) && isset($values)){
+            foreach ($values as $key => $value) {
                 $key++; // + 1 for bindParams
                 $this->bindValue($key, $value);
                 $lastValue++;
@@ -183,24 +184,24 @@ class Database {
         }
 
     }
-    public function rowCount() {
+    private function rowCount() {
         $this->execute();
         return $this->stm->fetchColumn();
     }
-    public function resultSet() {
+     private function resultSet() {
         $this->execute();
         return $this->stm->fetchAll(PDO::FETCH_ASSOC);
     }
-    public function resultSingle() {
+     private function resultSingle() {
         $this->execute();
         return $this->stm->fetch(PDO::FETCH_ASSOC);
     }
-    public function fetchSingleObject($object) {
+     private function fetchSingleObject($object) {
         $this->stm->setFetchMode(PDO::FETCH_INTO, new $object());
         $this->execute();
         return $this->stm->fetch();
     }
-    public function fetchObjectSet($object) {
+    private function fetchObjectSet($object) {
         $this->execute();
         return $this->stm->fetchAll(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, get_class($object));
     }

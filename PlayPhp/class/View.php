@@ -7,8 +7,8 @@
 namespace PlayPhp\Classes;
 
 /**
- * Description of Template
- *
+ * The view object has all methods used for creating views and passing data.
+ * @version 0.1
  * @author yuri.blanc
  */
 class View {
@@ -22,13 +22,18 @@ class View {
     private $view;
     
     /**
-     * 
-     * @param array $args
+     * Add data to the View object specifing a name and a value,
+     * set variables will be accessible with their $name in the rendered view.
+     * @param type $name Description
      */
     public function renderArgs($name, $value){
         $this->var[$name] = $value;
     }
-    
+    /**
+     * Render the view. Using relative paths you can specify subfolders of view root. (e.g. blog/post = view/blog/post.php)
+     * Automatically set .php extension to the view name.
+     * @param string $view
+     */
     public function render($view) {
         $this->page_content = $this->view = APP_ROOT."/view/$view.php";
         $this->renderArgs("template", $this->template);
@@ -40,9 +45,8 @@ class View {
     public function renderJson($data,$options=null) {
          echo json_encode($data,$options);
     }
-    
     /**
-     * 
+     * @deprecated since version 0.1
      * @param string $type
      * @param string $text
      */

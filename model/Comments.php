@@ -1,5 +1,5 @@
 <?php
-
+require './PlayPhp/class/Model.php';
 /*
  * Copyright (C) 2015 yuri.blanc
  *
@@ -17,29 +17,24 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace PlayPHP\Classes\Security;
-
 /**
- * Class with helper methods for string encryption, security object and tools.
+ * Description of Comments
  *
  * @author yuri.blanc
  */
-class Crypto {
 
-    
-    public function generateHash($password) {
-        return sha1($password);
-    }
-    
-    public function checkHash($password,$string) {
-        if (sha1($string) == $password) {
-            return true;
-        }
-    }
-    
-    
-    
-    
-    
 
+class Comments extends Model {
+    //put your code here
+    public $id;
+    public $post_id;
+    public $title;
+    public $text;
+    public $vote;
+    
+    
+    public function getComment($id) {
+       return $this->find(new Comments(), "WHERE post_id=?", array($id));
+    }
 }
+

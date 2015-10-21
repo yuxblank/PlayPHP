@@ -21,36 +21,56 @@ require_once 'Database.php';
  */
 
 /**
- * Description of PlayController
- *
+ * This class is a the PlayPHP framework controllers superclass. 
+ * Contains all the methods and imports required for using the framework built-in controllers functions.
  * @author yuri.blanc
+ * @version 0.1
+ * @since 0.1
  */
 class Controller {
     private static $session;
-    public function __construct() {
-        
-    }
     
-    public static function getSessionInstance() {
+    public function __construct() {  
+    }
+    /**
+     * @static
+     * Return the current session object.
+     * @return Sessions
+     */
+    private static function getSessionInstance() {
         if (self::$session == null) {
             self::$session = new Sessions ();
         }
         return self::$session;
     }
-    
+    /**
+     * Set a new session variable with name and object content.
+     * @static
+     * @param string $name
+     * @param mixed $object
+     */
     public static function setSession($name, $object) {
-        
         self::getSessionInstance()->setSession($name, $object);
     }
-    
+    /**
+     * Return current session objects from name.
+     * @static
+     * @param string $name
+     * @return Sessions
+     */
     public static function getSession($name) {
         return self::getSessionInstance()->getSession($name);
     }
+    /**
+     * Stop the current sessions and unset all variables.
+     */
     public static function stopSession() {
         self::getSessionInstance()->stop();
     }
 
     /**
+     * Set a cookie to be used as a flash. This type of cookie is used to preserve data across request. 
+     * As default the cookie duration is limited to 1s but can be overridden using the param expire. (in seconds)
      * @param string $name
      * @param string $value
      * @param int $expire in seconds
@@ -64,9 +84,6 @@ class Controller {
         setcookie($name, $value, $expire);
     
     }
-    
-    
-    
      /**
      * 
      * @param array $data

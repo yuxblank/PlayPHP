@@ -2,6 +2,7 @@
 //require './class/Template.php';
 //require './model/BlogPost.php';
 /*require './PlayPHP/class/Controller.php';*/
+require './model/Comments.php';
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -41,6 +42,11 @@ class BlogController extends Controller {
         $post = $db->findById($blogPost,$params->getGet()['id']);
         $this->template->renderArgs("post", $post );
         $this->template->renderArgs("page_title", "Blog post: $post->title");
+        
+        $comments = new Comments ();
+        $comments = $db->findAll($comments, "WHERE post_id=?" , array($post->id));
+        $this->template->renderArgs("comments", $comments);
+        
         $this->template->render("Frontend/post");
         
         
