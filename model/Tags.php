@@ -17,24 +17,24 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace PlayPHP\utils;
-
 /**
- * Description of Logger
+ * Description of Tags
  *
  * @author yuri.blanc
  */
-class Logger {
+class Tags {
+    public $id;
+    public $tag;
+    public $blogpost_id;
     
-    public static function error($message) {
-        $date = date("d/M/y H:m:s");
-        error_log("!> ERROR: ".$date. " - ". $message ."\n", 3, "logs/app.log");
+    function __construct() {
+        
     }
     
-    public static function info($message) {
-        $date = date("d/M/y H:m:s");
-        error_log("?> INFO: " . $date. " - ". $message ."\n", 3, "logs/app.log");
+    function ___construct($id, $tag, $blogpost_id) {
+        $this->id = $id;
+        $this->tag = $tag;
+        $this->blogpost_id = $blogpost_id;
     }
-
 
 }

@@ -3,10 +3,15 @@
   <div class="panel-body">
     <?php echo $post->text ?>
   </div>
+  <div class="panel-footer">
+      <?php foreach ($tags as $tag) { ?>
+      <button class='btn btn-info btn-sm'><?php echo $tag->tag ?></button>
+      <?php } ?>
+  </div>
 </div>
     <div class="comment panel panel-heading">
           <h3 class='text-primary'>Comments</h3>
-        <?php foreach ($comments as $comment) { ?>   
+        <?php    foreach ($comments as $comment) { ?>   
         <div class="well well-sm">
             <h4><?php echo $comment->title ?></h4>
             <blockquote><p><i><?php echo $comment->text ?></i></p></blockquote>

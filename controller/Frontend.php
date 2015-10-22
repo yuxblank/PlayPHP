@@ -4,7 +4,22 @@ require './PlayPHP/class/Secure.php';
 require './model/BlogPost.php';
 require './model/Users.php';
 require './PlayPHP/class/security/Crypto.php';
-
+/*
+ * Copyright (C) 2015 yuri.blanc
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 /**
  * Description of Frontend
  *
@@ -14,6 +29,7 @@ class Frontend extends Secure {
  
     
     public function index() {
+        \PlayPHP\utils\Logger::error("ciao");
         $view = new \PlayPhp\Classes\View();
         $bottom = array(
             'bottom' => array(
@@ -68,9 +84,9 @@ class Frontend extends Secure {
            $username = $params->getPost()['username'];
            $password = $params->getPost()['password'];
            
-           $user = new Users();
+           
            $db = new Database(); 
-           $dbUser = $db->find($user, "WHERE username=? AND password=?", array($username, Secure::encryptPassword($password)));
+           $dbUser = $db->find('Users', "WHERE username=? AND password=?", array($username, Secure::encryptPassword($password)));
            if ($dbUser) {
                     Controller::setSession("user", $username);
 //                  Controller::renderJSON("OK");
@@ -108,12 +124,12 @@ class Frontend extends Secure {
      
         $view =  new \PlayPhp\Classes\View();
         $db = new Database();
-        $obj = new BlogPost();
+
         $current = isset($params->getGet()['page']) ? $params->getGet()['page'] : 0;
        
-        $items = $db->countObjects($obj);
+        $items = $db->countObjects('Blogpost');
         $pages = ceil($items/5);
-        $blogPosts = $db->findAll($obj);
+        $blogPosts = $db->findAll('Blogpost');
         $view->renderArgs("page_title","Blog");
         $view->renderArgs("pages",$pages);
         $view->renderArgs("posts", $blogPosts);

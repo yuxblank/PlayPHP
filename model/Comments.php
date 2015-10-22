@@ -1,5 +1,5 @@
 <?php
-require './PlayPhp/class/Model.php';
+require_once './PlayPhp/class/Model.php';
 /*
  * Copyright (C) 2015 yuri.blanc
  *
@@ -27,14 +27,15 @@ require './PlayPhp/class/Model.php';
 class Comments extends Model {
     //put your code here
     public $id;
-    public $post_id;
+    public $blogpost_id;
     public $title;
     public $text;
     public $vote;
+    public $post;
     
-    
-    public function getComment($id) {
-       return $this->find(new Comments(), "WHERE post_id=?", array($id));
+    public function post() {
+        return $this->oneToOne($this,'BlogPost');
     }
+    
 }
 

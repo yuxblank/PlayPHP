@@ -1,5 +1,5 @@
 <?php
-
+require_once './PlayPhp/class/Model.php';
 /*
  * Copyright (C) 2015 yuri.blanc
  *
@@ -22,15 +22,14 @@
  *
  * @author yuri.blanc
  */
-class BlogPost {
+class BlogPost extends Model {
     public $id;
     public $title;
     public $text;
     
-    function __construct($id=null, $title=null, $text=null) {
-        $this->id = $id;
-        $this->title = $title;
-        $this->text = $text;
+    //OneToMany relationship!
+    function tags () {
+        return $this->oneToMany($this, 'Tags');
     }
 
 }

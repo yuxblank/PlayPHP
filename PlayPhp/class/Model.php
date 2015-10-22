@@ -22,75 +22,68 @@
  *
  * @author yuri.blanc
  */
-class Model extends Database {
-    
+class Model  {
+    private static $db;
     public function __construct() {
-        parent::__construct();
+        if (self::$db == null) {
+            self::$db = new Database ();
+        }        
     }
 
-        public final function countObjects($object) {
-        return parent::countObjects($object);
+    public final function countObjects() {
+       return self::$db->countObjects(get_called_class());
     }
 
     public final  function delete($object, $id) {
-       parent::delete($object, $id);
+      self::$db->delete(get_called_class(), $id);
     }
 
-    public final function fetchObjectSet($object) {
-        return parent::fetchObjectSet($object);
+
+    public final function find($query, $params) {
+        return self::$db->find(get_called_class(), $query, $params);
     }
 
-    public final function fetchSingleObject($object) {
-        return parent::fetchSingleObject($object);
+    public final function findAll($query = null, $values = null, $current = null, $max = null, $order = null) {
+        return self::$db->findAll(get_called_class(), $query, $values, $current, $max, $order);
     }
 
-    public final function find($object, $query, $params) {
-        return self::find($object, $query, $params);
-    }
-
-    public final function findAll($object, $query = null, $values = null, $current = null, $max = null, $order = null) {
-        return parent::findAll($object, $query, $values, $current, $max, $order);
-    }
-
-    public final function findById($object, $id) {
-        return parent::findById($object, $id);
+    public final function findById($id) {
+        return self::$db->findById(get_called_class(), $id);
     }
 
     public final function findMagic($query, $params) {
-        return parent::findMagic($query, $params);
+        return self::$db->findMagic($query, $params);
     }
 
     public final function findMagicSet($query, $params) {
-        return parent::findMagicSet($query, $params);
+        return self::$db->findMagicSet($query, $params);
     }
 
     public final function lastInsertId() {
-        return parent::lastInsertId();
+        return self::$db->lastInsertId();
     }
 
     public final function nativeQuery($query, $params) {
-        return sparent::nativeQuery($query, $params);
+        return self::$db->nativeQuery($query, $params);
     }
 
-    public final  function resultSet() {
-        return parent::resultSet();
+    public function save() {
+       self::$db->save(get_called_class());
     }
 
-    public function resultSingle() {
-        return parent::resultSingle();
+    public function update($id) {
+        self::$db->update(get_called_class(), $id);
     }
 
-    public function rowCount() {
-        return parent::rowCount();
+    public function oneToOne($object, $target) {
+        return self::$db->oneToOne($object, $target);
     }
-
-    public function save($object) {
-       parent::save($object);
-    }
-
-    public function update($object, $id) {
-        parent::update($object, $id);
-    }
-
     
+    public function oneToMany($object, $target) {
+        return self::$db->oneToMany($object, $target);
+    }
+    
+    public function manyToMany($target) {
+        
+    }
 }

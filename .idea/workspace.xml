@@ -1,20 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="49039dec-8300-471c-933e-4d01d5d31332" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/controller/BlogController.php" afterPath="$PROJECT_DIR$/controller/BlogController.php" />
-      <change type="MODIFICATION" beforePath="C:\xampp\htdocs\PlayPHP\PlayPHP\class\Controller.php" afterPath="$PROJECT_DIR$/PlayPHP/class/Controller.php" />
-      <change type="MODIFICATION" beforePath="C:\xampp\htdocs\PlayPHP\PlayPHP\class\security\Crypto.php" afterPath="$PROJECT_DIR$/PlayPHP/class/security/Crypto.php" />
-      <change type="MODIFICATION" beforePath="C:\xampp\htdocs\PlayPHP\PlayPHP\class\Database.php" afterPath="$PROJECT_DIR$/PlayPHP/class/Database.php" />
-      <change type="MODIFICATION" beforePath="C:\xampp\htdocs\PlayPHP\PlayPHP\class\utils\Logger.php" afterPath="$PROJECT_DIR$/PlayPHP/class/utils/Logger.php" />
-      <change type="MODIFICATION" beforePath="C:\xampp\htdocs\PlayPHP\PlayPHP\class\Router.php" afterPath="$PROJECT_DIR$/PlayPHP/class/Router.php" />
-      <change type="MODIFICATION" beforePath="C:\xampp\htdocs\PlayPHP\PlayPHP\class\Secure.php" afterPath="$PROJECT_DIR$/PlayPHP/class/Secure.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/model/Users.php" afterPath="$PROJECT_DIR$/model/Users.php" />
-      <change type="MODIFICATION" beforePath="C:\xampp\htdocs\PlayPHP\PlayPHP\class\View.php" afterPath="$PROJECT_DIR$/PlayPHP/class/View.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.php" afterPath="$PROJECT_DIR$/index.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/view/Frontend/post.php" afterPath="$PROJECT_DIR$/view/Frontend/post.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-    </list>
+    <list default="true" id="49039dec-8300-471c-933e-4d01d5d31332" name="Default" comment="" />
     <ignored path="PlayPHP.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path=".idea/dataSources.local.xml" />
@@ -266,7 +253,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="22" width="1932" height="1066" extended-state="0" />
+    <frame x="-8" y="22" width="1932" height="1066" extended-state="1" />
     <editor active="false" />
     <layout>
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />

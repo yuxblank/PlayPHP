@@ -2,6 +2,7 @@
 require_once 'Sessions.php';
 require_once 'View.php';
 require_once 'Database.php';
+require_once 'utils/Logger.php';
 
 /*
  * Copyright (C) 2015 yuri.blanc
