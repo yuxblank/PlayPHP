@@ -52,9 +52,11 @@ class View {
         extract($this->var);
         include APP_ROOT."template/$this->template/index.php";
     }
-    
+    // good as controller function
     public function renderJson($data,$options=null) {
          echo json_encode($data,$options);
     }
+
+    
 
 }

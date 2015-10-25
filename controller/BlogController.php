@@ -56,7 +56,9 @@ class BlogController extends Controller {
         $this->template->renderArgs("post", $post);
         $this->template->renderArgs("page_title", "Blog post: $post->title");
         // get post tags using oneToMany
+       
         $tags = $post->tags();
+        
         $this->template->renderArgs("tags", $tags);
         // get post comments
         $comment = new Comments ();
@@ -64,6 +66,18 @@ class BlogController extends Controller {
         $this->template->renderArgs("comments", $comments);
         // render view
         $this->template->render("Frontend/post");
+    }
+    
+    public function filterTag($params) {
+        $tags = new Tags();
+        $tags = $tags->findById($params->getGet()['id']);
+        $posts = $tags->post();
+        print_r($posts);
+        
+        $view = new \PlayPhp\Classes\View();
+        $view->renderArgs("posts", $posts);
+        $view->render("Frontend/filterTag");
+        
     }
     
     

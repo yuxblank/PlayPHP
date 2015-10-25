@@ -9,10 +9,10 @@
       <?php } ?>
   </div>
 </div>
-    <div class="comment panel panel-heading">
+    <div class="comment-block panel panel-heading">
           <h3 class='text-primary'>Comments</h3>
         <?php    foreach ($comments as $comment) { ?>   
-        <div class="well well-sm">
+        <div class="comment well well-sm">
             <h4><?php echo $comment->title ?></h4>
             <blockquote><p><i><?php echo $comment->text ?></i></p></blockquote>
             <p>rating: <?php echo $comment->vote ?>/5   </p>
@@ -23,13 +23,52 @@
               <div class="form-group">
                   <label for="user">User:</label>
                   <input type="text" class="form-control" id="user" value="<?php echo $_COOKIE['user']; ?>" disabled="">
-                  <textarea class="form-control"></textarea>
+                  <label for="title">Title:</label>
+                  <input type="text" class="form-control" id="title" name='title'>
+                  <label for="vote">Vote:</label>
+                  <select id='vote' name='vote'>
+                      <option>1</option>
+                      <option>2</option>
+                      <option>3</option>
+                      <option>4</option>
+                      <option>5</option>
+                  </select>
+                  <input type='hidden' name='blogpost_id' value="<?php echo $post->id ?>">
+                  <textarea class="form-control" id='text' name='text'></textarea>
               </div>
-              <button type="submit" class="btn btn-default">Submit</button>
+              <button type="button" id="commentsend" class="btn btn-default">Submit</button>
           </form>
-          
-          
     </div>
+
+<script>
+ $('#commentsend').on('click', function(){
+    
+var request = $.ajax({
+  url: "<?php echo Router::go("Frontend@addComment") ?>",
+  type: "POST",
+  data: $('form').serialize()
+ // dataType: "html"
+});
+
+request.done(function(msg) {
+  if (msg==='OK') {
+      window.location.reload();
+
+  } else {
+      $('.yx-notify-ajax').show().text('invalid submission')
+      $('input').val('');
+      $('.yx-notify-ajax').delay(2000).fadeOut(500);
+ }  
+});
+
+request.fail(function(jqXHR, textStatus) {
+  alert( "Request failed: " + textStatus );
+});
+    
+});
+    
+    
+</script>
 
     
     

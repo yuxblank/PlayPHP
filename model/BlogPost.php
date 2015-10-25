@@ -1,5 +1,7 @@
 <?php
 require_once './PlayPhp/class/Model.php';
+require_once 'Comments.php';
+require_once 'Tags.php';
 /*
  * Copyright (C) 2015 yuri.blanc
  *
@@ -30,6 +32,10 @@ class BlogPost extends Model {
     //OneToMany relationship!
     function tags () {
         return $this->oneToMany($this, 'Tags');
+    }
+    
+    function comments() {
+        return $this->oneToMany($this, 'Comments');
     }
 
 }

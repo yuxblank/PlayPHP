@@ -10,5 +10,10 @@
   {"action" : "Frontend@logout", "method" : "GET", "url" : "logout"},
   {"action" : "Frontend@authenticate", "method" : "POST", "url" : "authenticate"},
   {"action" : "Frontend@authenticateAjax", "method" : "POST", "url" : "authenticateAjax"},
+  {"action" : "Frontend@addComment", "method" : "POST", "url" : "addComment"},
+  {"action" : "Blogcontroller@filterTag", "method" : "GET", "url" : "filterTag/id/?"},
+ 
+ 
+ 
   {"action" : "Frontend@page404", "method" : "GET", "url" : "404"}
 ]}

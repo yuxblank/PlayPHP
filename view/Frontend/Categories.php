@@ -1,6 +1,5 @@
 <?php
 require_once './PlayPhp/class/Model.php';
-require_once 'BlogPost.php';
 /*
  * Copyright (C) 2015 yuri.blanc
  *
@@ -19,29 +18,17 @@ require_once 'BlogPost.php';
  */
 
 /**
- * Description of Tags
+ * Description of Categories
  *
  * @author yuri.blanc
  */
-class Tags extends Model {
+class Categories extends Model {
     public $id;
-    public $tag;
-    public $blogpost_id;
+    public $title;
+    public $description;
+    private $post;
     
-    function __construct() {
-        parent::__construct();
-    }
     
-    function ___construct($id, $tag, $blogpost_id) {
-        $this->id = $id;
-        $this->tag = $tag;
-        $this->blogpost_id = $blogpost_id;
-    }
     
-    public function post() {
-       return $this->oneToMany($this, 'BlogPost');
-    }
-   
     
-
 }

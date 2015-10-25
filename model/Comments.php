@@ -31,11 +31,22 @@ class Comments extends Model {
     public $title;
     public $text;
     public $vote;
-    public $post;
+    
+    function __construct($id=null, $blogpost_id=null, $title=null, $text=null, $vote=null) {
+        parent::__construct(); // !!! make sure to call Model parent construct!!! 
+        $this->id = $id;
+        $this->blogpost_id = $blogpost_id;
+        $this->title = $title;
+        $this->text = $text;
+        $this->vote = $vote;
+    }
+
     
     public function post() {
         return $this->oneToOne($this,'BlogPost');
     }
+    
+
     
 }
 

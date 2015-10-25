@@ -136,7 +136,6 @@ class Router {
                 }
             }
         }
-
         // never found
         if (!$queryReplace) {
             $route->url = "404";

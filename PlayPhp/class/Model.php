@@ -67,8 +67,8 @@ class Model  {
         return self::$db->nativeQuery($query, $params);
     }
 
-    public function save() {
-       self::$db->save(get_called_class());
+    public function save($object) {
+       return self::$db->save($object);
     }
 
     public function update($id) {

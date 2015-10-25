@@ -157,7 +157,7 @@ class Database {
                 $statement.=" ".$order;
             }
             $statement.= " LIMIT ?, ? ";
-        }
+        }   
         $this->query($statement);
         $lastValue = 0;
         if (isset($query) && isset($values)){
@@ -187,7 +187,7 @@ class Database {
      * @param object $object
      */
     public function save($object) {
-        $table = $this->objectInjector($object);
+        $table = $this->objectInjector(get_class($object));
         $statement = "INSERT INTO $table VALUES (";
         $values="";
         foreach ($object as $key => $value) {
@@ -196,9 +196,9 @@ class Database {
         $values = substr($values, 0, -1);
         $values.=")";
         $statement.=$values;
-        echo ($statement);   // debug
+  
         $this->stm = $this->pdo->prepare($statement);
-        $this->execute($object);
+        return $this->execute($object);
     }
     /**
      * Update an object instance in the data-layer
@@ -227,9 +227,9 @@ class Database {
      */
     public function delete($object,$id) {
         $table = $this->objectInjector($object);
-        $statement = "DELETE FROM $table WHERE id=:id";
+        $statement = "DELETE FROM $table WHERE id=?";
         $this->stm = $this->pdo->prepare($statement);
-        $this->bindValue(":id",$id);
+        $this->bindValue(1,$id);
         $this->stm->execute();
     }
     /**
@@ -307,6 +307,10 @@ class Database {
          * SELECT * FROM `tags` WHERE blogpost_id = (SELECT  id FROM blogpost WHERE ID = 20)
          */
        
+    }
+    
+    public function manyToOne($collection, $target) {
+     
     }
     
     public function manyToMany() {
@@ -393,9 +397,9 @@ class Database {
      */
     private function execute($object=null) {
         if(isset($object)){
-        $this->stm->execute((array)$object);
+         return $this->stm->execute((array)$object);
         } else {
-            $this->stm->execute();
+            return $this->stm->execute();
         }
 
     }

@@ -68,7 +68,6 @@ if ($redirect) {
         case 'GET':
             if (Router::checkRoutes($redirect->action, "GET")) {
                //preg_match("[\d-aA-zZ\/]+", $app_root); // drop {}
-                    
                 for ($i = 1; $i < count($route); $i++) {
                     // TODO odd routes should trow an exception
                     $request->setGet($route[$i], $route[++$i]);

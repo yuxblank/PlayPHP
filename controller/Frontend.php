@@ -123,13 +123,13 @@ class Frontend extends Secure {
     public function blog($params) {
      
         $view =  new \PlayPhp\Classes\View();
-        $db = new Database();
+        
 
         $current = isset($params->getGet()['page']) ? $params->getGet()['page'] : 0;
-       
-        $items = $db->countObjects('Blogpost');
-        $pages = ceil($items/5);
-        $blogPosts = $db->findAll('Blogpost');
+        $blogPosts = new BlogPost();
+//        $items = $db->countObjects('Blogpost');
+//        $pages = ceil($items/5);
+        $blogPosts = $blogPosts->findAll();
         $view->renderArgs("page_title","Blog");
         $view->renderArgs("pages",$pages);
         $view->renderArgs("posts", $blogPosts);
@@ -139,4 +139,21 @@ class Frontend extends Secure {
     public function page404() {
         echo "PAGINA 404";
     }
+    
+    
+    public function addComment($params) {
+        
+        if ($params->getPost()!=null) {
+            $comments = new Comments(null, $params->getPost()['blogpost_id'],  $params->getPost()['title'],
+            $params->getPost()['text'],  $params->getPost()['vote']);
+            $view = new \PlayPhp\Classes\View();
+            if ($comments->save($comments)) {
+                echo "OK";
+                exit();
+            } else {
+                  $view->renderJson(array(0,'unable to save'));
+            }
+        } 
+    }
+    
 }
