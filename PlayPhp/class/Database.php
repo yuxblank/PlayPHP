@@ -103,13 +103,15 @@ class Database {
         }
 //        $table = strtolower($object);
         $statement = "SELECT * FROM $table ".$query;
+        
     
         $this->query($statement);
-        foreach ($params as $key => $value) {
-            $key++; // + 1 for bindParams
-            $this->bindValue($key, $value);
-         
-        }
+//        foreach ($params as $key => $value) {
+//            $key++; // + 1 for bindParams
+//            $this->bindValue($key, $value);
+//         
+//        }
+        $this->paramsBinder($params);
         return $this->fetchSingleObject($object);
     }
     /**
@@ -174,6 +176,12 @@ class Database {
         }
         return $this->fetchObjectSet($object);
     }
+    
+    /**
+     * Counts the occurrencies of a give object type
+     * @param string $object
+     * @return int
+     */
     
     public function countObjects($object) {
         $table = $this->objectInjector($object);
@@ -308,13 +316,78 @@ class Database {
          */
        
     }
-    
-    public function manyToOne($collection, $target) {
-     
+    /*
+     * SELECT * from blogpost_tags WHERE tag_id = ?;
+     */
+    /**
+     * Return a collection of ojects of a N to N relationship. The table must be called $object_$target, the N/N table must contain
+     * $object_id reference. The table names uses the convetion of lowercase (@see ObjectInjector).
+     * Return an ArrayObject of the $target object class.
+     * @param object $object
+     * @param string $target
+     * @return \ArrayObject
+     */
+    public function manyToMany($object, $target) {
+        
+        $parent = $this->objectInjector(get_class($object));
+        $child = $this->objectInjector($target);
+        $query = "SELECT * FROM ".$parent ."_". $child ." WHERE ". $parent ."_id = ?";
+//        echo $query;
+        $this->query($query);
+        $this->bindValue(1, $object->id);
+        $relations = $this->fetchObj();
+        
+        
+//        print_r($relations);
+        $list = new ArrayObject();
+        $child_id = $child.'_id';
+        foreach ($relations as $key => $value) {
+            
+            $query = "SELECT * from $target WHERE id=?";     
+            $this->query($query);
+            $this->bindValue(1, $value->$child_id);
+            $obj = $this->fetchSingleObject($this->objectInjector($target));
+            $list->append($obj);
+            
+        }
+      
+        return $list;
     }
     
-    public function manyToMany() {
+    /**
+     * Return a collection of ojects of a N to N relationship. The table must be called $target_$object
+     * , the N/N table must contain
+     * $object_id reference. The table names uses the convetion of lowercase (@see ObjectInjector).
+     * Return an ArrayObject of the $target object class.
+     * @param type $object
+     * @param type $target
+     * @return \ArrayObject
+     */
+        public function _manyToMany($object, $target) {
         
+        $parent = $this->objectInjector(get_class($object));
+        $child = $this->objectInjector($target);
+        $query = "SELECT * FROM ".$child ."_". $parent ." WHERE ". $parent ."_id = ?";
+//        echo $query;
+        $this->query($query);
+        $this->bindValue(1, $object->id);
+        $relations = $this->fetchObj();
+        
+        
+//        print_r($relations);
+        $list = new ArrayObject();
+        $child_id = $child.'_id';
+        foreach ($relations as $key => $value) {
+            
+            $query = "SELECT * from $target WHERE id=?";     
+            $this->query($query);
+            $this->bindValue(1, $value->$child_id);
+            $obj = $this->fetchSingleObject($this->objectInjector($target));
+            $list->append($obj);
+            
+        }
+      
+        return $list;
     }
     
     
@@ -410,6 +483,10 @@ class Database {
      private function resultSet() {
         $this->execute();
         return $this->stm->fetchAll(PDO::FETCH_ASSOC);
+    }
+    private function fetchObj() {
+        $this->execute();
+        return $this->stm->fetchAll(PDO::FETCH_OBJ);
     }
      private function resultSingle() {
         $this->execute();

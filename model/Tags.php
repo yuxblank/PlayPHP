@@ -41,6 +41,10 @@ class Tags extends Model {
     public function post() {
        return $this->oneToMany($this, 'BlogPost');
     }
+    
+    public function posts() {
+        return $this->_manyToMany($this, 'BlogPost');
+    }
    
     
 

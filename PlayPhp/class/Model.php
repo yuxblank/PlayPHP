@@ -83,7 +83,10 @@ class Model  {
         return self::$db->oneToMany($object, $target);
     }
     
-    public function manyToMany($target) {
-        
+    public function manyToMany($object, $target) {
+        return self::$db->manyToMany($object, $target);
+    }
+    public function _manyToMany($object, $target) {
+        return self::$db->_manyToMany($object, $target);
     }
 }

@@ -30,8 +30,11 @@ class BlogPost extends Model {
     public $text;
     
     //OneToMany relationship!
-    function tags () {
-        return $this->oneToMany($this, 'Tags');
+//    function tags () {
+//        return $this->oneToMany($this, 'Tags');
+//    }
+    function tags() {
+        return $this->manyToMany($this, 'Tags');
     }
     
     function comments() {

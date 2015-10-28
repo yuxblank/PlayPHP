@@ -70,9 +70,15 @@ class BlogController extends Controller {
     
     public function filterTag($params) {
         $tags = new Tags();
-        $tags = $tags->findById($params->getGet()['id']);
-        $posts = $tags->post();
-        print_r($posts);
+        $tag =  urldecode($params->getGet()['tag']);
+        $tags = $tags->find("WHERE tag LIKE ? ",array($tag));
+     
+      
+//      
+//        $tags->posts();
+        if ($tags) {
+        $posts = $tags->posts();  
+        } 
         
         $view = new \PlayPhp\Classes\View();
         $view->renderArgs("posts", $posts);

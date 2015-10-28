@@ -6,7 +6,11 @@
 </div>
 
 
-            <?php foreach ($posts as $post) { ?>
+            <?php foreach ($posts as $post) {
+                
+        
+                
+                ?>
             <div class='panel panel-default' style='padding:15px;'>
                 <h1><?php echo $post->title ?></h1>
                 <p><?php echo $post->text ?> </p>
@@ -17,7 +21,7 @@
                   * example of onetomany in template
                   */
                 ?>
-                      <a href='filterTag/id/<?php echo $tag->id ?>' class='btn btn-sm' ><?php echo $tag->tag ?></a>
+                      <a href='filterTag/tag/<?php echo $tag->tag ?>' class='btn btn-info btn-sm' ><?php echo $tag->tag ?></a>
                     <?php } ?>
             </div>  
     <?php } ?>

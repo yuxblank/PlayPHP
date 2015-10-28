@@ -18,10 +18,6 @@
  */
 ?>
 <div class="container col-xs-offset-10">
-<div class="pull-left">
-<button type="button" class="btn btn-success" data-toggle="modal" data-target="#newItem">New blog post
-</button>
-</div>
 </div>
 
 
@@ -29,7 +25,7 @@
             <div class='panel panel-default' style='padding:15px;'>
                 <h1><?php echo $post->title ?></h1>
                 <p><?php echo $post->text ?> </p>
-                <p><a href='showPost/id/<?php echo $post->id ?>'>Read more...</a></p>
+                <p><a href='<?php echo Router::go("BlogController@showPost",array($post->id)) ?>'>Read more...</a></p>
                     <?php foreach ($post->tags() as $tag) { ?>
                 <?php 
                  /*
@@ -67,29 +63,4 @@
 </nav>
 
 
-<!-- Modal -->
 
-</div><div class="modal fade" id="newItem" tabindex="-1" role="dialog" aria-labelledby="New Product">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">New Blog post</h4>
-      </div>
-      <div class="modal-body">
-          <form method="POST" action="<?php echo Router::go("BlogController@saveBlogPost")?>">
-  <div class="form-group">
-    <label for="title">Title</label>
-    <input type="text" class="form-control" id="title" placeholder="Title..." name="title" required>
-    <label for="desc">Title</label>
-    <textarea class="form-control" id="text" name="text" placeholder="your_text"  required></textarea>
-  </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary">Save changes</button>
-      </div>
-</form>  
-    </div>
-  </div>
-</div>
