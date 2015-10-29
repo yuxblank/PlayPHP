@@ -15,5 +15,5 @@
  
  
  
-  {"action" : "Frontend@page404", "method" : "GET", "url" : "404"}
+  {"action" : "Errors@page404", "method" : "GET", "url" : "404"}
 ]}

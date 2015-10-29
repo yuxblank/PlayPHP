@@ -18,15 +18,16 @@
             <p>rating: <?php echo $comment->vote ?>/5   </p>
         </div>
         <?php } ?>
-          
+          <?php $attr = Controller::getSession("user") ? "" : "disabled";
+          ?>
           <form>
               <div class="form-group">
                   <label for="user">User:</label>
-                  <input type="text" class="form-control" id="user" value="<?php echo $_COOKIE['user']; ?>" disabled="">
+                  <input type="text" class="form-control" id="user" value="<?php echo Controller::getSession("user"); ?>" disabled>
                   <label for="title">Title:</label>
-                  <input type="text" class="form-control" id="title" name='title'>
+                  <input type="text" class="form-control" id="title" name='title'  <?php echo $attr?>>
                   <label for="vote">Vote:</label>
-                  <select id='vote' name='vote'>
+                  <select id='vote' name='vote'  <?php echo $attr?>>
                       <option>1</option>
                       <option>2</option>
                       <option>3</option>
@@ -34,9 +35,9 @@
                       <option>5</option>
                   </select>
                   <input type='hidden' name='blogpost_id' value="<?php echo $post->id ?>">
-                  <textarea class="form-control" id='text' name='text'></textarea>
+                  <textarea class="form-control" id='text' name='text'  <?php echo $attr?>></textarea>
               </div>
-              <button type="button" id="commentsend" class="btn btn-default">Submit</button>
+              <button type="button" id="commentsend" class="btn btn-default"  <?php echo $attr?>>Submit</button>
           </form>
     </div>
 

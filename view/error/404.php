@@ -1,5 +1,6 @@
 <?php
-/*
+
+/* 
  * Copyright (C) 2015 yuri.blanc
  *
  * This program is free software: you can redistribute it and/or modify
@@ -15,60 +16,10 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+?>
 
-
-
-class Request {
-
-    private $post=array();
-    private $get=array();
-    private $put=array();
-    private $delete=array();
-
-    /**
-     * @return array
-     */
-    public function getPost()
-    {
-        return $this->post;
-    }
-
-    /**
-     * @param array $post
-     */
-    public function setPost($name,$value)
-    {
-        $this->post[$name] = $value;
-    }
-
-    /**
-     * @return array
-     */
-    public function getGet()
-    {
-        return $this->get;
-    }
-
-    /**
-     * @param array $get
-     */
-    public function setGet($name,$value)
-    {
-        $this->get[$name] = $value;
-    }
-    
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-}
+<div class="jumbotron">
+    <h1><b>Oops,</b> page not found!</h1>
+    <p>This page is not available anymore.</p>
+    <p><a class="btn btn-info btn-lg" href="<?php echo Router::go("Frontend@index")?>" role="button">Retun to home</a></p>
+</div>

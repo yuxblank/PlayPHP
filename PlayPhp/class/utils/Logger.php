@@ -35,6 +35,20 @@ class Logger {
         $date = date("d/M/y H:m:s");
         error_log("?> INFO: " . $date. " - ". $message ."\n", 3, "logs/app.log");
     }
+    
+    public static function exception($exception) {
+        $date = date("d/M/y H:m:s");
+        error_log("!> EXCEPTION: " . $date. " - " 
+                . $exception->getMessage() 
+                . "\nCode: " . $exception->getCode()
+                . "\nFile: " . $exception->getFile()
+                . "\n.::StackTrace::.\n" .$exception->getTraceAsString()
+                ."\n", 3, "logs/app.log");
+    }
+    
+    public static function appLog() {
+        
+    }
 
 
 }

@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Copyright (C) 2015 yuri.blanc
  *
@@ -16,59 +17,12 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-
-
-class Request {
-
-    private $post=array();
-    private $get=array();
-    private $put=array();
-    private $delete=array();
-
-    /**
-     * @return array
-     */
-    public function getPost()
-    {
-        return $this->post;
-    }
-
-    /**
-     * @param array $post
-     */
-    public function setPost($name,$value)
-    {
-        $this->post[$name] = $value;
-    }
-
-    /**
-     * @return array
-     */
-    public function getGet()
-    {
-        return $this->get;
-    }
-
-    /**
-     * @param array $get
-     */
-    public function setGet($name,$value)
-    {
-        $this->get[$name] = $value;
-    }
-    
-    
-
-
-
-
-
-
-
-
-
-
-
+/**
+ * Description of FileNotFoundException
+ *
+ * @author yuri.blanc
+ */
+class FileNotFoundException extends Exception {
 
 
 }

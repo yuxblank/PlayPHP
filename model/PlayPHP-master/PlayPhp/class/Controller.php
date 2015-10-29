@@ -31,8 +31,7 @@ require_once 'utils/Logger.php';
 class Controller {
     private static $session;
     
-    public function __construct() { 
-        defined("PlayExec") or die (".:: Play Execution - unvalid access to resources ::. ");
+    public function __construct() {  
     }
     /**
      * @static

@@ -32,7 +32,7 @@
                   * example of onetomany in template
                   */
                 ?>
-                      <a href='filterTag/id/<?php echo $tag->id ?>' class='btn btn-sm' ><?php echo $tag->tag ?></a>
+                <a href=' <?php echo APP_URL ?>filterTag/tag/<?php echo $tag->tag ?>' class='btn btn-sm btn-info' ><?php echo $tag->tag ?></a>
                     <?php } ?>
             </div>  
     <?php } ?>

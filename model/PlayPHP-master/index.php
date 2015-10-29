@@ -22,10 +22,6 @@
  * @copyright (c) 2015, Yuri Blanc
  * @since 0.1
  */
-/**
- * Define the executor
- */
-define("PlayExec", true);
 
 error_reporting( E_ALL & ~( E_NOTICE | E_STRICT | E_DEPRECATED ) );
 include_once 'controller/Frontend.php';

@@ -35,7 +35,7 @@ class Model  {
     }
 
     public final  function delete($object, $id) {
-      return self::$db->delete(get_called_class(), $id);
+      self::$db->delete(get_called_class(), $id);
     }
 
 

@@ -136,9 +136,7 @@ class Frontend extends Secure {
         $view->render("Frontend/blog");
     }
     
-    public function page404() {
-        echo "PAGINA 404";
-    }
+    
     
     
     public function addComment($params) {

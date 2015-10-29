@@ -37,7 +37,7 @@ class Database {
     private $dbUser = DB_USER;
     private $dbPwd = DB_PSW;
     private $options = DB_OPTIONS;
-
+    private $ex;
     /**
      * Constructor connects to database
      */
@@ -46,7 +46,7 @@ class Database {
         try {
         $this->pdo = new PDO($dsn, $this->dbUser, $this->dbPwd);
         } catch (PDOException $ex) {
-            $ex->getMessage();
+            $this->ex = $ex->getMessage();
             if(APP_DEBUG) {
                 d($ex->getTrace());
             }
@@ -226,7 +226,7 @@ class Database {
         echo ($statement);   // debug
         $this->stm = $this->pdo->prepare($statement);
         $this->bindValue($id, $values);
-        return $this->execute($object);
+        $this->execute($object);
     }
     /**
      * Delete an object instance in the data-layer
@@ -238,7 +238,7 @@ class Database {
         $statement = "DELETE FROM $table WHERE id=?";
         $this->stm = $this->pdo->prepare($statement);
         $this->bindValue(1,$id);
-        return $this->stm->execute();
+        $this->stm->execute();
     }
     /**
      * Return last inserted id

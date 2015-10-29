@@ -1,4 +1,5 @@
 <?php
+namespace PlayPhp\Classes;
 /*
  * Copyright (C) 2015 yuri.blanc
  *
@@ -15,8 +16,8 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+require_once '/exceptions/IoExceptions.php';
 
-namespace PlayPhp\Classes;
 
 /**
  * The view object has all methods used for creating views and passing data.
@@ -46,11 +47,25 @@ class View {
      * @param string $view
      */
     public function render($view) {
-        $this->page_content = $this->view = APP_ROOT."/view/$view.php";
+        
+        $this->page_content = $this->view = APP_ROOT."view/$view.php";
         $this->renderArgs("template", $this->template);
         $this->renderArgs("page_content", $this->page_content);
         extract($this->var);
-        include APP_ROOT."template/$this->template/index.php";
+        try {
+            if (!file_exists($this->page_content)) {
+                throw new \FileNotFoundException("File not found: ". $this->page_content);
+            }
+
+            include APP_ROOT."view/main.php";
+
+            if (!file_exists(APP_ROOT."template/$this->template/index.php")) {
+                 throw new \FileNotFoundException ("File not found: " . APP_ROOT."template/$this->template/index.php");
+            }
+            
+        } catch (\FileNotFoundException $ex) {
+            
+        }
     }
     // good as controller function
     public function renderJson($data,$options=null) {
