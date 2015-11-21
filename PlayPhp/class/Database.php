@@ -45,6 +45,8 @@ class Database {
         $dsn = $this->dbDriver.':host=' .$this->dbHost . ";dbname=".$this->dbName;
         try {
         $this->pdo = new PDO($dsn, $this->dbUser, $this->dbPwd);
+        $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
+        $this->pdo->setAttribute(PDO::ATTR_EMULATE_PREPARES, true);
         } catch (PDOException $ex) {
             $ex->getMessage();
             if(APP_DEBUG) {
@@ -204,7 +206,6 @@ class Database {
         $values = substr($values, 0, -1);
         $values.=")";
         $statement.=$values;
-  
         $this->stm = $this->pdo->prepare($statement);
         return $this->execute($object);
     }
@@ -214,16 +215,16 @@ class Database {
      * @param int $id
      */
     public function update($object,$id) {
-        $table = $this->objectInjector($object);
-        $statement = "UPDATE $table SET (";
+        $table = $this->objectInjector(get_class($object));
+        $statement = "UPDATE $table SET ";
         $values="";
         foreach ($object as $key => $value) {
             $values.= $key."=:".$key.",";
         }
         $values = substr($values, 0, -1);
-        $values.=") WHERE id=:id";
+        $values.=" WHERE id=:id";
         $statement.=$values;
-        echo ($statement);   // debug
+//        echo $statement;
         $this->stm = $this->pdo->prepare($statement);
         $this->bindValue($id, $values);
         return $this->execute($object);
@@ -469,12 +470,11 @@ class Database {
      * @param object $object
      */
     private function execute($object=null) {
-        if(isset($object)){
-         return $this->stm->execute((array)$object);
-        } else {
-            return $this->stm->execute();
-        }
-
+            if(isset($object)){
+             return $this->stm->execute((array)$object);
+            } else {
+                return $this->stm->execute();
+            }
     }
     private function rowCount() {
         $this->execute();

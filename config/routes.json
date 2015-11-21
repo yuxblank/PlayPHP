@@ -1,5 +1,5 @@
 {"routes":[
-  {"action":"Frontend@index", "method":"GET", "url" : ""},
+  {"action":"Frontend@index", "method":"GET", "url" : "/"},
   {"action":"Frontend@register", "method":"POST", "url" : "register"},
   {"action":"Frontend@register", "method":"GET", "url" : "register"},
   {"action":"Frontend@blog", "method":"GET", "url" : "blog"},

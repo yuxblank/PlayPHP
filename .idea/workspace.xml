@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="49039dec-8300-471c-933e-4d01d5d31332" name="Default" comment="" />
+    <list default="true" id="49039dec-8300-471c-933e-4d01d5d31332" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="C:\xampp\htdocs\PlayPHP\PlayPHP\class\Database.php" afterPath="$PROJECT_DIR$/PlayPHP/class/Database.php" />
+      <change type="MODIFICATION" beforePath="C:\xampp\htdocs\PlayPHP\PlayPHP\class\Model.php" afterPath="$PROJECT_DIR$/PlayPHP/class/Model.php" />
+      <change type="MODIFICATION" beforePath="C:\xampp\htdocs\PlayPHP\PlayPHP\class\Router.php" afterPath="$PROJECT_DIR$/PlayPHP/class/Router.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/logs/app.log" afterPath="$PROJECT_DIR$/logs/app.log" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../pizzalachance.it/config/database.php" afterPath="$PROJECT_DIR$/../pizzalachance.it/config/database.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.php" afterPath="$PROJECT_DIR$/index.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/routes.json" afterPath="$PROJECT_DIR$/config/routes.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+    </list>
     <ignored path="PlayPHP.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path=".idea/dataSources.local.xml" />
@@ -30,8 +39,8 @@
       <file leaf-file-name="index.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/index.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.019318182">
-              <caret line="1" column="2" selection-start-line="1" selection-start-column="2" selection-end-line="1" selection-end-column="2" />
+            <state vertical-scroll-proportion="0.17366628">
+              <caret line="54" column="39" selection-start-line="54" selection-start-column="39" selection-end-line="54" selection-end-column="39" />
               <folding />
             </state>
           </provider>
@@ -40,8 +49,31 @@
       <file leaf-file-name="Database.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/PlayPHP/class/Database.php">
           <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-9.153846">
+              <caret line="47" column="72" selection-start-line="47" selection-start-column="72" selection-end-line="47" selection-end-column="72" />
+              <folding>
+                <marker date="1448105479628" expanded="true" signature="3546:3567" placeholder="SELECT * FRO..." />
+                <marker date="1448105479628" expanded="true" signature="4344:4377" placeholder="SELECT * FRO..." />
+                <marker date="1448105479628" expanded="true" signature="5092:5113" placeholder="SELECT * FRO..." />
+                <marker date="1448105479628" expanded="true" signature="6094:6115" placeholder="SELECT COUNT..." />
+                <marker date="1448105479628" expanded="true" signature="6405:6432" placeholder="INSERT INTO ..." />
+                <marker date="1448105479628" expanded="true" signature="7624:7653" placeholder="DELETE FROM ..." />
+                <marker date="1448105479628" expanded="true" signature="8921:8997" placeholder="SELECT * FRO..." />
+                <marker date="1448105479628" expanded="true" signature="9857:9938" placeholder="SELECT * FRO..." />
+                <marker date="1448105479628" expanded="true" signature="10856:10922" placeholder="SELECT * FRO..." />
+                <marker date="1448105479628" expanded="true" signature="11262:11294" placeholder="SELECT * fro..." />
+                <marker date="1448105479628" expanded="true" signature="12150:12216" placeholder="SELECT * FRO..." />
+                <marker date="1448105479628" expanded="true" signature="12556:12588" placeholder="SELECT * fro..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="routes.json" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/config/routes.json">
+          <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="-0.65384614">
-              <caret line="1" column="9" selection-start-line="1" selection-start-column="9" selection-end-line="1" selection-end-column="9" />
+              <caret line="1" column="56" selection-start-line="1" selection-start-column="56" selection-end-line="1" selection-end-column="56" />
               <folding />
             </state>
           </provider>
@@ -68,8 +100,6 @@
         <option value="$PROJECT_DIR$/settings/app.php" />
         <option value="$PROJECT_DIR$/class/Database.php" />
         <option value="$PROJECT_DIR$/class/Routes.php" />
-        <option value="$PROJECT_DIR$/config/database.php" />
-        <option value="$PROJECT_DIR$/config/routes.json" />
         <option value="$PROJECT_DIR$/class/Router.php" />
         <option value="$PROJECT_DIR$/model/Products.php" />
         <option value="$PROJECT_DIR$/class/PlayController.php" />
@@ -82,12 +112,15 @@
         <option value="$PROJECT_DIR$/PlayPHP/class/Secure.php" />
         <option value="$PROJECT_DIR$/composer.json" />
         <option value="$PROJECT_DIR$/config/app.php" />
-        <option value="$PROJECT_DIR$/index.php" />
         <option value="$PROJECT_DIR$/PlayPHP/class/Sessions.php" />
         <option value="$PROJECT_DIR$/controller/Frontend.php" />
         <option value="$PROJECT_DIR$/controller/BlogController.php" />
         <option value="$PROJECT_DIR$/template/core/index.php" />
         <option value="$PROJECT_DIR$/PlayPHP/class/Controller.php" />
+        <option value="$PROJECT_DIR$/config/database.php" />
+        <option value="$PROJECT_DIR$/PlayPHP/class/Database.php" />
+        <option value="$PROJECT_DIR$/config/routes.json" />
+        <option value="$PROJECT_DIR$/index.php" />
       </list>
     </option>
   </component>
@@ -110,7 +143,7 @@
   <component name="ProjectFrameBounds">
     <option name="x" value="-8" />
     <option name="y" value="22" />
-    <option name="width" value="1924" />
+    <option name="width" value="1936" />
     <option name="height" value="1066" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
@@ -143,14 +176,6 @@
               <option name="myItemId" value="PlayPHP" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="External Libraries" />
-              <option name="myItemType" value="com.jetbrains.php.config.PhpExternalLibrariesNodePatcher$PatchedExternalLibrariesNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="PHP" />
-              <option name="myItemType" value="com.jetbrains.php.config.PhpExternalLibrariesNodePatcher$PatchedLibraryNode" />
-            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -180,6 +205,20 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="PlayPHP" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="PlayPHP" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="config" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
       <pane id="Scope" />
@@ -196,10 +235,12 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\xampp\htdocs\PlayPHP\config" />
       <recent name="C:\xampp\htdocs\PlayPHP\class" />
       <recent name="C:\xampp\htdocs\PlayPHP" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\xampp\htdocs\PlayPHP\config" />
       <recent name="C:\xampp\htdocs\PlayPHP" />
       <recent name="C:\xampp\htdocs\PlayPHP\PlayPhp" />
       <recent name="C:\xampp\htdocs\PlayPHP\class" />
@@ -260,11 +301,11 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="22" width="1924" height="1066" extended-state="1" />
-    <editor active="false" />
+    <frame x="-8" y="22" width="1936" height="1066" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.27360514" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2750533" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
@@ -383,13 +424,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/config/database.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="8" column="26" selection-start-line="8" selection-start-column="26" selection-end-line="8" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/model/BlogPost.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -488,13 +522,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/config/database.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/config/app.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -530,24 +557,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/config/routes.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.9230769">
-          <caret line="6" column="82" selection-start-line="6" selection-start-column="82" selection-end-line="6" selection-end-column="82" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/model/BlogPost.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.038636364">
           <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/config/database.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.230769">
-          <caret line="8" column="26" selection-start-line="8" selection-start-column="26" selection-end-line="8" selection-end-column="26" />
         </state>
       </provider>
     </entry>
@@ -656,18 +669,55 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/config/database.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.15437004">
+          <caret line="23" column="31" selection-start-line="23" selection-start-column="31" selection-end-line="23" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../pizzalachance.it/config/database.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.19296254">
+          <caret line="25" column="21" selection-start-line="25" selection-start-column="21" selection-end-line="25" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/PlayPHP/class/Database.php">
       <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-9.153846">
+          <caret line="47" column="72" selection-start-line="47" selection-start-column="72" selection-end-line="47" selection-end-column="72" />
+          <folding>
+            <marker date="1448105479628" expanded="true" signature="3546:3567" placeholder="SELECT * FRO..." />
+            <marker date="1448105479628" expanded="true" signature="4344:4377" placeholder="SELECT * FRO..." />
+            <marker date="1448105479628" expanded="true" signature="5092:5113" placeholder="SELECT * FRO..." />
+            <marker date="1448105479628" expanded="true" signature="6094:6115" placeholder="SELECT COUNT..." />
+            <marker date="1448105479628" expanded="true" signature="6405:6432" placeholder="INSERT INTO ..." />
+            <marker date="1448105479628" expanded="true" signature="7624:7653" placeholder="DELETE FROM ..." />
+            <marker date="1448105479628" expanded="true" signature="8921:8997" placeholder="SELECT * FRO..." />
+            <marker date="1448105479628" expanded="true" signature="9857:9938" placeholder="SELECT * FRO..." />
+            <marker date="1448105479628" expanded="true" signature="10856:10922" placeholder="SELECT * FRO..." />
+            <marker date="1448105479628" expanded="true" signature="11262:11294" placeholder="SELECT * fro..." />
+            <marker date="1448105479628" expanded="true" signature="12150:12216" placeholder="SELECT * FRO..." />
+            <marker date="1448105479628" expanded="true" signature="12556:12588" placeholder="SELECT * fro..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/routes.json">
+      <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.65384614">
-          <caret line="1" column="9" selection-start-line="1" selection-start-column="9" selection-end-line="1" selection-end-column="9" />
+          <caret line="1" column="56" selection-start-line="1" selection-start-column="56" selection-end-line="1" selection-end-column="56" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/index.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.019318182">
-          <caret line="1" column="2" selection-start-line="1" selection-start-column="2" selection-end-line="1" selection-end-column="2" />
+        <state vertical-scroll-proportion="0.17366628">
+          <caret line="54" column="39" selection-start-line="54" selection-start-column="39" selection-end-line="54" selection-end-column="39" />
           <folding />
         </state>
       </provider>

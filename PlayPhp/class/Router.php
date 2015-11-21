@@ -137,10 +137,11 @@ class Router {
             }
         }
         // never found
-        if (!$queryReplace) {
-            $route->url = "404";
-            return $route;
-        }
+//        if (!$queryReplace) {
+//            $route->url = "404";
+//            return $route;
+//        }
+        return $route;
     }
     /**
      * Performs a check for a valid action and method in routes. if action and method belongs to a route returns the route.

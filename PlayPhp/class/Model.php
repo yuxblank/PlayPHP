@@ -71,8 +71,8 @@ class Model  {
        return self::$db->save($object);
     }
 
-    public function update($id) {
-        self::$db->update(get_called_class(), $id);
+    public function update($object,$id) {
+        return self::$db->update($object, $id);
     }
 
     public function oneToOne($object, $target) {
