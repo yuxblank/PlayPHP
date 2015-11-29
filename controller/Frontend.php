@@ -3,7 +3,6 @@
 require './PlayPHP/class/Secure.php';
 require './model/BlogPost.php';
 require './model/Users.php';
-require './PlayPHP/class/security/Crypto.php';
 /*
  * Copyright (C) 2015 yuri.blanc
  *

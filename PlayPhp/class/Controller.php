@@ -39,7 +39,7 @@ class Controller {
      * Return the current session object.
      * @return Sessions
      */
-    private static function getSessionInstance() {
+    public static function getSessionInstance() {
         if (self::$session == null) {
             self::$session = new Sessions ();
         }
@@ -89,7 +89,7 @@ class Controller {
      /**
      * 
      * @param array $data
-     * @param const $options
+     * @param 3const $options
      */
     public static function renderJSON($data, $options=null) {
         header('Content-Type: application/json');

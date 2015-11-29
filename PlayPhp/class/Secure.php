@@ -1,5 +1,6 @@
 <?php
 require 'Controller.php';
+require 'security/Crypto.php';
 /*
  * Copyright (C) 2015 yuri.blanc
  *

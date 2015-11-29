@@ -45,7 +45,7 @@ class Database {
         $dsn = $this->dbDriver.':host=' .$this->dbHost . ";dbname=".$this->dbName;
         try {
         $this->pdo = new PDO($dsn, $this->dbUser, $this->dbPwd);
-        $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
+        $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $this->pdo->setAttribute(PDO::ATTR_EMULATE_PREPARES, true);
         } catch (PDOException $ex) {
             $ex->getMessage();
@@ -219,15 +219,24 @@ class Database {
         $statement = "UPDATE $table SET ";
         $values="";
         foreach ($object as $key => $value) {
-            $values.= $key."=:".$key.",";
+            if(!empty($value)) {
+                $values .= $key . "=:" . $key . ",";
+            }
         }
         $values = substr($values, 0, -1);
         $values.=" WHERE id=:id";
         $statement.=$values;
 //        echo $statement;
         $this->stm = $this->pdo->prepare($statement);
-        $this->bindValue($id, $values);
-        return $this->execute($object);
+
+        foreach ($object as $key =>$value) {
+            if(!empty($value)) {
+                $this->bindValue($key, $value);
+            }
+        }
+
+
+        return $this->execute();
     }
     /**
      * Delete an object instance in the data-layer

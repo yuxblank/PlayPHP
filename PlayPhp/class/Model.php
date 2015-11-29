@@ -22,7 +22,7 @@
  *
  * @author yuri.blanc
  */
-class Model  {
+abstract class Model  {
     private static $db;
     public function __construct() {
         if (self::$db == null) {
@@ -67,12 +67,12 @@ class Model  {
         return self::$db->nativeQuery($query, $params);
     }
 
-    public function save($object) {
-       return self::$db->save($object);
+    public function save() {
+       return self::$db->save($this);
     }
 
-    public function update($object,$id) {
-        return self::$db->update($object, $id);
+    public function update($id) {
+        return self::$db->update($this, $id);
     }
 
     public function oneToOne($object, $target) {

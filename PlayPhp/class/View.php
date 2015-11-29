@@ -47,6 +47,10 @@ class View {
      * @param string $view
      */
     public function render($view) {
+ 
+        if (strpos($view, "/")!==false) {
+        $path = implode("/",array_slice(explode("/", $view), 0,-1));
+        }
         
         $this->page_content = $this->view = APP_ROOT."view/$view.php";
         $this->renderArgs("template", $this->template);
@@ -56,8 +60,11 @@ class View {
             if (!file_exists($this->page_content)) {
                 throw new \FileNotFoundException("File not found: ". $this->page_content);
             }
-
+            if (!$path) {
             include APP_ROOT."view/main.php";
+            } else {    
+                include APP_ROOT."view/$path/main.php";
+            }
 
             if (!file_exists(APP_ROOT."template/$this->template/index.php")) {
                  throw new \FileNotFoundException ("File not found: " . APP_ROOT."template/$this->template/index.php");

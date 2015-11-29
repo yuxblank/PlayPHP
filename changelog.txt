@@ -1,0 +1,13 @@
+PlayPHP Changelog
+...::::::LEGEND:::::::...
+**************************
+* [*] FIX                *
+* [+] NEW FEATURE        *
+* [-] REMOVED            *
+**************************
+
+29/11/2015 :
++ Model Class now abstract for supporting self operations
++ Template inheritance
+* Database Class update now doesn't update empty values
+
