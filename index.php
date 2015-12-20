@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Copyright (C) 2015 yuri.blanc
  *
@@ -60,7 +61,6 @@ if ($redirect) {
                     $request->setPost($name, $value);
                 }
                 break;
-
             } else {
                 Router::notFound($redirect->action, "POST");
             }
@@ -71,10 +71,8 @@ if ($redirect) {
                 for ($i = 1; $i < count($route); $i++) {
                     // TODO odd routes should trow an exception
                     $request->setGet($route[$i], $route[++$i]);
-
                 }
                 break;
-
             } else {
                 Router::notFound($redirect->action, "GET");
             }
@@ -83,7 +81,9 @@ if ($redirect) {
             //rest_head($request);
             break;
         case 'DELETE':
-            //rest_delete($request);
+            if (Router::checkRoutes($redirect->action, "DELETE")) {
+                
+            }
             break;
         case 'OPTIONS':
             //rest_options($request);

@@ -59,9 +59,9 @@ class Frontend extends Secure {
     }
     
     public function authenticate($params) {
-       if (isset($params->getPost()['username']) && isset($params->getPost()['password'])) {
-           $username = $params->getPost()['username'];
-           $password = $params->getPost()['password'];
+       if ($params->getPost('username') && $params->getPost('password')) {
+           $username = $params->getPost('username');
+           $password = $params->getPost('password');
            $user = new Users();
            $db = new Database(); 
        
@@ -79,9 +79,9 @@ class Frontend extends Secure {
     public function authenticateAjax($params){
 
         
-        if (isset($params->getPost()['username']) && isset($params->getPost()['password'])) {
-           $username = $params->getPost()['username'];
-           $password = $params->getPost()['password'];
+        if ($params->getPost('username') && $params->getPost('password')) {
+           $username = $params->getPost('username');
+           $password = $params->getPost('password');
            
            
            $db = new Database(); 
@@ -103,9 +103,9 @@ class Frontend extends Secure {
             $view =  new \PlayPhp\Classes\View();
             $view->renderArgs("page_title","Register");
             $view->render("Frontend/register");
-    } else if ($params->getPost()['username']!=null && $params->getPost()['password']!=null) {
-            $username = $params->getPost()['username'];
-            $password = sha1($params->getPost()['password']);  
+    } else if ($params->getPost('username') && $params->getPost('password')) {
+            $username = $params->getPost('username');
+            $password = sha1($params->getPost('password'));  
             $user = new Users($username, $password);
             $db = new Database();
             $db->save($user);
@@ -124,7 +124,7 @@ class Frontend extends Secure {
         $view =  new \PlayPhp\Classes\View();
         
 
-        $current = isset($params->getGet()['page']) ? $params->getGet()['page'] : 0;
+        $current = $params->getGet('page') ? $params->getGet('page') : 0;
         $blogPosts = new BlogPost();
 //        $items = $db->countObjects('Blogpost');
 //        $pages = ceil($items/5);
@@ -141,8 +141,8 @@ class Frontend extends Secure {
     public function addComment($params) {
         
         if ($params->getPost()!=null) {
-            $comments = new Comments(null, $params->getPost()['blogpost_id'],  $params->getPost()['title'],
-            $params->getPost()['text'],  $params->getPost()['vote']);
+            $comments = new Comments(null, $params->getPost('blogpost_id'),  $params->getPost('title'),
+            $params->getPost('text'),  $params->getPost('vote'));
             $view = new \PlayPhp\Classes\View();
             if ($comments->save($comments)) {
                 echo "OK";

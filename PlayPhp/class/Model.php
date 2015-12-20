@@ -27,15 +27,15 @@ abstract class Model  {
     public function __construct() {
         if (self::$db == null) {
             self::$db = new Database ();
-        }        
+        }
     }
 
     public final function countObjects() {
-       return self::$db->countObjects(get_called_class());
+        return self::$db->countObjects(get_called_class());
     }
 
     public final  function delete($object, $id) {
-      return self::$db->delete(get_called_class(), $id);
+        return self::$db->delete(get_called_class(), $id);
     }
 
 
@@ -68,21 +68,24 @@ abstract class Model  {
     }
 
     public function save() {
-       return self::$db->save($this);
+        return self::$db->save($this);
     }
 
-    public function update($id) {
-        return self::$db->update($this, $id);
+    public function update() {
+        return self::$db->update($this);
     }
 
     public function oneToOne($object, $target) {
         return self::$db->oneToOne($object, $target);
     }
-    
+
     public function oneToMany($object, $target) {
         return self::$db->oneToMany($object, $target);
     }
-    
+    public function manyToOne($object, $target) {
+        return self::$db->manyToOne($object, $target);
+    }
+
     public function manyToMany($object, $target) {
         return self::$db->manyToMany($object, $target);
     }

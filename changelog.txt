@@ -11,3 +11,5 @@ PlayPHP Changelog
 + Template inheritance
 * Database Class update now doesn't update empty values
 
+20/12/2015 :
++ added oneToMany ORM method

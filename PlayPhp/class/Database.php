@@ -44,9 +44,9 @@ class Database {
     public function __construct() {
         $dsn = $this->dbDriver.':host=' .$this->dbHost . ";dbname=".$this->dbName;
         try {
-        $this->pdo = new PDO($dsn, $this->dbUser, $this->dbPwd);
-        $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $this->pdo->setAttribute(PDO::ATTR_EMULATE_PREPARES, true);
+            $this->pdo = new PDO($dsn, $this->dbUser, $this->dbPwd);
+            $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $this->pdo->setAttribute(PDO::ATTR_EMULATE_PREPARES, true);
         } catch (PDOException $ex) {
             $ex->getMessage();
             if(APP_DEBUG) {
@@ -54,12 +54,12 @@ class Database {
             }
         }
     }
-    
+
     public function nativeQuery($query,$params) {
-       $this->query($query);
-       $this->paramsBinder($params);
-       $this->execute();
-       return $this->stm->fetch(PDO::FETCH_ASSOC);
+        $this->query($query);
+        $this->paramsBinder($params);
+        $this->execute();
+        return $this->stm->fetch(PDO::FETCH_ASSOC);
     }
     /**
      * Returns a stdClass represention of the target table.
@@ -73,7 +73,7 @@ class Database {
         $this->execute();
         return $this->stm->fetch(PDO::FETCH_OBJ);
     }
-        /**
+    /**
      * Returns an array of stdClass represention of the target table.
      * @param string $query
      * @param mixed[] $params
@@ -85,18 +85,18 @@ class Database {
         $this->execute();
         return $this->stm->fetchAll(PDO::FETCH_OBJ);
     }
-    
+
     /**
      * Build a query using an object and returning that object instance from the datasource.
      * The object passed is used as table name, converted in lowercase. (e.g. Posts() = table post).
      * @param string $object
      * @param string $query
      * @param mixed[] $params array with all params data non assoc.
-     * @return object 
+     * @return object
      */
     public function find($object,$query,$params) {
         try {
-        $table = $this->objectInjector($object);
+            $table = $this->objectInjector($object);
         } catch (Exception $e) {
             if (APP_DEBUG) {
                 print_r($e->getTrace());
@@ -105,8 +105,8 @@ class Database {
         }
 //        $table = strtolower($object);
         $statement = "SELECT * FROM $table ".$query;
-        
-    
+
+
         $this->query($statement);
 //        foreach ($params as $key => $value) {
 //            $key++; // + 1 for bindParams
@@ -117,14 +117,14 @@ class Database {
         return $this->fetchSingleObject($object);
     }
     /**
-    * Find an object instance using the table id. Table primary key must be called id.
-    * @param object $object
-    * @param int    $id
-    * @return object Object instance
-    **/
-     public function findById($object,$id) {
+     * Find an object instance using the table id. Table primary key must be called id.
+     * @param object $object
+     * @param int    $id
+     * @return object Object instance
+     **/
+    public function findById($object,$id) {
         try {
-        $table = $this->objectInjector($object);
+            $table = $this->objectInjector($object);
         } catch (Exception $e) {
             if (APP_DEBUG) {
                 d($e->getTrace());
@@ -144,11 +144,11 @@ class Database {
      * @param int $current
      * @param int $min
      * @param int $max
-     * @return list 
+     * @return list
      */
     public function findAll($object,$query=null,$values=null,$current=null,$max=null,$order=null) {
         try {
-        $table = $this->objectInjector($object);
+            $table = $this->objectInjector($object);
         } catch (Exception $e) {
             if (APP_DEBUG) {
                 d($e->getTrace());
@@ -161,7 +161,7 @@ class Database {
                 $statement.=" ".$order;
             }
             $statement.= " LIMIT ?, ? ";
-        }   
+        }
         $this->query($statement);
         $lastValue = 0;
         if (isset($query) && isset($values)){
@@ -178,20 +178,20 @@ class Database {
         }
         return $this->fetchObjectSet($object);
     }
-    
+
     /**
      * Counts the occurrencies of a give object type
      * @param string $object
      * @return int
      */
-    
+
     public function countObjects($object) {
         $table = $this->objectInjector($object);
         $query = "SELECT COUNT(*) FROM $table";
         $this->query($query);
         return $this->rowCount();
     }
-    
+
     /**
      * Persist an object in the data-layer
      * @param object $object
@@ -214,7 +214,7 @@ class Database {
      * @param object $object
      * @param int $id
      */
-    public function update($object,$id) {
+    public function update($object) {
         $table = $this->objectInjector(get_class($object));
         $statement = "UPDATE $table SET ";
         $values="";
@@ -226,7 +226,8 @@ class Database {
         $values = substr($values, 0, -1);
         $values.=" WHERE id=:id";
         $statement.=$values;
-//        echo $statement;
+        print_r($object);
+        echo $statement;
         $this->stm = $this->pdo->prepare($statement);
 
         foreach ($object as $key =>$value) {
@@ -267,12 +268,12 @@ class Database {
      * @param type $dbPassword
      * @param type $options
      */
-    
+
     // ::: ORM ::: \\
     // MUST BE OBJECTS
     /**
      * Create a 1-1 relationship from two objects. Returns the target object of the relationship.
-     * e.g (Posts() 1 <=> 1 Category()) 
+     * e.g (Posts() 1 <=> 1 Category())
      * The parent table must contain table_id of the foreign key. (e.g. post contains category_id column)
      * @param object $object
      * @param string $target
@@ -294,8 +295,8 @@ class Database {
 //        echo $query;
 //        echo $object->id;
         $this->bindValue(1, $object->id);
-   
-        return $this->fetchSingleObject($target);  
+
+        return $this->fetchSingleObject($target);
     }
     /**
      * Create 1-N relationship from two objects. Returns an array of target objects of the relationship.
@@ -314,17 +315,48 @@ class Database {
                 d($e->getTrace());
             }
             return;
-        }  
+        }
         $query = "SELECT * FROM $child WHERE ". $parent ."_id = (SELECT id FROM $parent WHERE id=?)";
         $this->query($query);
         $this->bindValue(1, $object->id);
-        
+
         return $this->fetchObjectSet($target);
-        
+
         /*
          * SELECT * FROM `tags` WHERE blogpost_id = (SELECT  id FROM blogpost WHERE ID = 20)
          */
-       
+
+    }
+
+    /**
+     * * Create N-1 relationship from two objects. Returns an array of target objects of the relationship.
+     * Is the inverse of oneToMany
+     * e.g. (Posts() N <=> 1 Tags())
+     * The parent table should contain the child id. (e.g. post contains tags_id column)
+     * @param $object
+     * @param $target
+     */
+
+    public function manyToOne($object, $target) {
+        try {
+            $parent = $this->objectInjector(get_class($object));
+            $child = $this->objectInjector($target);
+        } catch (Exception $e) {
+            if (APP_DEBUG) {
+                d($e->getTrace());
+            }
+            return;
+        }
+        $query = "SELECT * FROM $child WHERE id = (SELECT ". $child ."_id FROM $parent WHERE id=?)";
+        $this->query($query);
+        $this->bindValue(1, $object->id);
+
+        return $this->fetchSingleObject($target);
+
+        /*
+         * SELECT * FROM `tags` WHERE blogpost_id = (SELECT  id FROM blogpost WHERE ID = 20)
+         */
+
     }
     /*
      * SELECT * from blogpost_tags WHERE tag_id = ?;
@@ -338,7 +370,7 @@ class Database {
      * @return \ArrayObject
      */
     public function manyToMany($object, $target) {
-        
+
         $parent = $this->objectInjector(get_class($object));
         $child = $this->objectInjector($target);
         $query = "SELECT * FROM ".$parent ."_". $child ." WHERE ". $parent ."_id = ?";
@@ -346,24 +378,24 @@ class Database {
         $this->query($query);
         $this->bindValue(1, $object->id);
         $relations = $this->fetchObj();
-        
-        
+
+
 //        print_r($relations);
         $list = new ArrayObject();
         $child_id = $child.'_id';
         foreach ($relations as $key => $value) {
-            
-            $query = "SELECT * from $target WHERE id=?";     
+
+            $query = "SELECT * from $target WHERE id=?";
             $this->query($query);
             $this->bindValue(1, $value->$child_id);
             $obj = $this->fetchSingleObject($this->objectInjector($target));
             $list->append($obj);
-            
+
         }
-      
+
         return $list;
     }
-    
+
     /**
      * Return a collection of ojects of a N to N relationship. The table must be called $target_$object
      * , the N/N table must contain
@@ -373,8 +405,8 @@ class Database {
      * @param type $target
      * @return \ArrayObject
      */
-        public function _manyToMany($object, $target) {
-        
+    public function _manyToMany($object, $target) {
+
         $parent = $this->objectInjector(get_class($object));
         $child = $this->objectInjector($target);
         $query = "SELECT * FROM ".$child ."_". $parent ." WHERE ". $parent ."_id = ?";
@@ -382,26 +414,26 @@ class Database {
         $this->query($query);
         $this->bindValue(1, $object->id);
         $relations = $this->fetchObj();
-        
-        
+
+
 //        print_r($relations);
         $list = new ArrayObject();
         $child_id = $child.'_id';
         foreach ($relations as $key => $value) {
-            
-            $query = "SELECT * from $target WHERE id=?";     
+
+            $query = "SELECT * from $target WHERE id=?";
             $this->query($query);
             $this->bindValue(1, $value->$child_id);
             $obj = $this->fetchSingleObject($this->objectInjector($target));
             $list->append($obj);
-            
+
         }
-      
+
         return $list;
     }
-    
-    
-    
+
+
+
     final public function changeDb($dbDriver, $dbHost, $dbName, $dbUser, $dbPassword, $options=null ) {
         $this->pdo = null;
         $this->dbDriver = $dbDriver;
@@ -413,7 +445,7 @@ class Database {
         // make a new conn
         $dsn = $this->dbDriver.':host=' .$this->dbHost . ";dbname=".$this->dbName;
         try {
-        $this->pdo = new PDO($dsn, $this->dbUser, $this->dbPwd, $this->options);
+            $this->pdo = new PDO($dsn, $this->dbUser, $this->dbPwd, $this->options);
         } catch (PDOException $ex) {
             $this->ex = $ex->getMessage();
         }
@@ -443,7 +475,7 @@ class Database {
 //        } else {
 //            return strtolower(get_class($object));
 //        }
-        
+
         return strtolower($object);
     }
     /**
@@ -456,14 +488,14 @@ class Database {
             $this->bindValue($key, $value);
         }
     }
-        /**
+    /**
      * @param SQL_QUERY $statament SQL query with : placeholders
      * @param Array $params names of placeholders
      * @param Array $params placeholders values
      */
     private function query($statement) {
-       $stm = $this->pdo->prepare($statement);
-       $this->stm = $stm;
+        $stm = $this->pdo->prepare($statement);
+        $this->stm = $stm;
     }
     /**
      *
@@ -473,23 +505,23 @@ class Database {
     private function bindValue ($param, $value) {
         $this->stm->bindParam($param,$value);
     }
-    
-        /**
+
+    /**
      *
      * @param object $object
      */
     private function execute($object=null) {
-            if(isset($object)){
-             return $this->stm->execute((array)$object);
-            } else {
-                return $this->stm->execute();
-            }
+        if(isset($object)){
+            return $this->stm->execute((array)$object);
+        } else {
+            return $this->stm->execute();
+        }
     }
     private function rowCount() {
         $this->execute();
         return $this->stm->fetchColumn();
     }
-     private function resultSet() {
+    private function resultSet() {
         $this->execute();
         return $this->stm->fetchAll(PDO::FETCH_ASSOC);
     }
@@ -497,11 +529,11 @@ class Database {
         $this->execute();
         return $this->stm->fetchAll(PDO::FETCH_OBJ);
     }
-     private function resultSingle() {
+    private function resultSingle() {
         $this->execute();
         return $this->stm->fetch(PDO::FETCH_ASSOC);
     }
-     private function fetchSingleObject($object) {
+    private function fetchSingleObject($object) {
         $this->stm->setFetchMode(PDO::FETCH_INTO, new $object());
         $this->execute();
         return $this->stm->fetch();

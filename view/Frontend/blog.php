@@ -7,7 +7,6 @@
 
 
             <?php foreach ($posts as $post) {
-                
         
                 
                 ?>
