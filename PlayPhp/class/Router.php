@@ -59,13 +59,16 @@ class Router {
         if ($route) {
             // case with N params
             if (isset($params)) {
-                $queryString = null;
-                // replace each ? with the current params in order
-                foreach ($params as $key => $value) {
-                    $queryString = str_replace("?", $value, $route->url);
+                $queryString;
+                foreach($params as $key => $value) {
+                    // find position of key
+                    $currentParam = "{".$key."}";
+                    if (strpos($route->url, $currentParam)) {
+                       $route->url = str_replace($currentParam, $value, $route->url);   
+                    }   
                 }
                 // return queryString url
-                return APP_URL . "$queryString";
+                return APP_URL . $route->url;
             }
             // return url from json
             return APP_URL . "$route->url";
@@ -117,15 +120,72 @@ class Router {
     public static function findAction($query) {
 
         $queryArray = explode("/", $query);
+        //print_r($queryArray);
      
+        // check not paramtered routes
         foreach (Router::getInstance()->routes as $route) {
-            if ($route->url == $query) {
+         //echo "for 1";
+            if ($route->url === $query) {
+                //echo "1 is equal";
                 // replace current routes url with incoming url
                 $route->url = $query;
                 return $route;
-            } else {
-                $queryReplace = null;
+            } else if (preg_match("({[aA-zZ 0-9]+})",$route->url)) {
+              
+             // check parametered routes  
+            $queryReplace;
+            //echo "for 2";
+            $routeArray = explode("/", $route->url);
+            //print_r($routeArray);
+            $replaceArray = array();
+            // check about size
+                if (count($queryArray) === count($routeArray)) { 
+                    //create params array
+                    $paramsArray = array();
+                    for ($i=0;$i<count($queryArray);$i++) {
+                        if ($queryArray[$i] === $routeArray[$i]) {
+                            //echo $queryArray[$i]  . "===" . $routeArray[$i] . "<br>";
+                            $replaceArray[$i] = $queryArray[$i];
+                        } else if (preg_match("({[aA-zZ0-9]+})",$routeArray[$i])) {
+                            //echo "preg match ". $routeArray[$i] . "<br>";
+                            $replaceArray[$i] = $queryArray[$i];
+                            $paramsArray[str_replace(array("{","}"),"",$routeArray[$i])] = $queryArray[$i];
+                        }
+                        // check non equals values
+                        //  "/({[aA-zZ 0-9]+})+/"  
+                        }
+                    $newUrl = implode("/", $replaceArray);
+                    //echo "<br>".$newUrl;
+                      if ($newUrl===$query) {
+                        $route->url = $query;
+                        $route->getParams = $paramsArray;
+                        return $route;
+                        }
+                
+            }
+        }     
+        // check parametered routes  
+        /*
+            $queryReplace = null;
+            echo "for 2";
+            $routeArray = explode("/", $route->url);
+            // check about size
+                if (count($queryArray) === count($routeArray)) {
                 foreach ($queryArray as $key => $value) {
+                    
+                    // check non equals values
+                    //  "/({[aA-zZ 0-9]+})+/"
+                
+                        if ($newUrl===$query) {
+                        $route->url = $query;
+                        return $route;
+                        }
+                    
+                    
+                        
+                    }
+                    
+                    /*
                     if (strpos($route->url, "?")) {
                         $queryReplace = str_replace("?", $value, $route->url);
                         if ($queryReplace == $query) {
@@ -133,14 +193,16 @@ class Router {
                             return $route;
                         }
                     }
+                
+                if (!count(array_diff($queryArray, $routeArray))>0) {
+                    $route->url = $query;
+                    return $route;
                 }
             }
-        }
-        // never found
-//        if (!$queryReplace) {
-//            $route->url = "404";
-//            return $route;
-//        }
+                 */
+                  
+        }  
+        // return 404
         return $route;
     }
     /**

@@ -46,20 +46,18 @@ class BlogController extends Controller {
         
     }
     
-    public function showPost($params) {
+    public function showPost($params) { 
         // create blogpost object
         $post = new BlogPost();
         // create view
         $this->template = new \PlayPhp\Classes\View();
         //find post
-        $post = $post->findById($params->getGet()['id']);
+        $post = $post->findById($params->getGet()["id"]);
         $this->template->renderArgs("post", $post);
         $this->template->renderArgs("page_title", "Blog post: $post->title");
         // get post tags using oneToMany
        
-        $tags = $post->tags();
-        
-        $this->template->renderArgs("tags", $tags);
+       
         // get post comments
         $comment = new Comments ();
         $comments = $comment->findAll("WHERE blogpost_id=?", array($post->id));

@@ -56,6 +56,12 @@ class Request {
     {
         $this->get[$name] = $value;
     }
+    
+    public function _setGet($params) {
+        foreach ($params as $key => $value) {
+            $this->get[$key] = $value;
+        }
+    }
 
 
 

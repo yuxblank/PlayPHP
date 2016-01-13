@@ -13,14 +13,14 @@
             <div class='panel panel-default' style='padding:15px;'>
                 <h1><?php echo $post->title ?></h1>
                 <p><?php echo $post->text ?> </p>
-                <p><a href='showPost/id/<?php echo $post->id ?>'>Read more...</a></p>
+                <p><a href='<?php echo Router::go("BlogController@showPost", array("id"=> $post->id, "title"=>$post->title)) ?>'>Read more...</a></p>
                     <?php foreach ($post->tags() as $tag) { ?>
                 <?php 
                  /*
                   * example of onetomany in template
                   */
                 ?>
-                      <a href='filterTag/tag/<?php echo $tag->tag ?>' class='btn btn-info btn-sm' ><?php echo $tag->tag ?></a>
+                      <a href='filterTag/<?php echo $tag->tag ?>' class='btn btn-info btn-sm' ><?php echo $tag->tag ?></a>
                     <?php } ?>
             </div>  
     <?php } ?>

@@ -374,7 +374,7 @@ class Database {
         $parent = $this->objectInjector(get_class($object));
         $child = $this->objectInjector($target);
         $query = "SELECT * FROM ".$parent ."_". $child ." WHERE ". $parent ."_id = ?";
-//        echo $query;
+        //echo $query;
         $this->query($query);
         $this->bindValue(1, $object->id);
         $relations = $this->fetchObj();

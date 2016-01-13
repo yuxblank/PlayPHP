@@ -13,3 +13,14 @@ PlayPHP Changelog
 
 20/12/2015 :
 + added oneToMany ORM method
+
+13/01/2016
+* fixed router check and replace method
++ now router support multiple get params filters
++ Request get injection is now based on routes conditions
++ Routes conditions now are written {name}, the name is the corresponding get parameters caugth
+* index changes to support new get injection
+<-->
+|| notes ||
+Still need a better Request class, http delegation and params injection via varargs.
+<-->

@@ -4,7 +4,7 @@
     <?php echo $post->text ?>
   </div>
   <div class="panel-footer">
-      <?php foreach ($tags as $tag) { ?>
+      <?php foreach ($post->tags() as $tag) { ?>
       <button class='btn btn-info btn-sm'><?php echo $tag->tag ?></button>
       <?php } ?>
   </div>

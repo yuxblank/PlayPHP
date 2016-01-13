@@ -22,8 +22,9 @@
  *
  * @author yuri.blanc
  */
-class Get extends stdClass {
-    
-    
+class Get {
+    private $name;
+	private $value;
+	
     
 }
