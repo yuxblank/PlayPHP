@@ -37,8 +37,8 @@ and open the template in the editor.
 </nav>
                 <?php 
                 if (isset($message['error'])) {
-                    echo'<div class="alert alert-warning alert-dismissible" role="alert">'
-                            . '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>'
+                    echo'<div classes="alert alert-warning alert-dismissible" role="alert">'
+                            . '<button type="button" classes="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>'
                             . '<strong>'.$message['error'].'</strong></div>';
                 }
                 
@@ -57,8 +57,8 @@ and open the template in the editor.
                     <?php 
                     $html = "";
                     foreach ($bottom as $value) {
-                        $html .= "<div class='bottom col-xs-offset-2'>"
-                                . "<div class='container col-xs-4'>"
+                        $html .= "<div classes='bottom col-xs-offset-2'>"
+                                . "<div classes='container col-xs-4'>"
                                 . "<h3>".$value['bottom_title']."</h3>"
                                 . "<p>".$value['bottom_text']."</p>"
                                 . "</div>"

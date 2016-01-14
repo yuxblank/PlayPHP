@@ -1,5 +1,5 @@
 <?php
-require_once './PlayPhp/class/Model.php';
+require_once './PlayPhp/classes/Model.php';
 require_once 'Comments.php';
 require_once 'Tags.php';
 /*

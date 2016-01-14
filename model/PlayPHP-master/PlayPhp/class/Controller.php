@@ -22,7 +22,7 @@ require_once 'utils/Logger.php';
  */
 
 /**
- * This class is a the PlayPHP framework controllers superclass. 
+ * This classes is a the PlayPHP framework controllers superclass.
  * Contains all the methods and imports required for using the framework built-in controllers functions.
  * @author yuri.blanc
  * @version 0.1

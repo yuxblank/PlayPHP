@@ -62,8 +62,8 @@
                     <?php 
                     $html = "";
                     foreach ($bottom as $value) {
-                        $html .= "<div class='bottom col-xs-offset-2'>"
-                                . "<div class='container col-xs-4'>"
+                        $html .= "<div classes='bottom col-xs-offset-2'>"
+                                . "<div classes='container col-xs-4'>"
                                 . "<h3>".$value['bottom_title']."</h3>"
                                 . "<p>".$value['bottom_text']."</p>"
                                 . "</div>"

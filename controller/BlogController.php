@@ -1,7 +1,7 @@
 <?php
-//require './class/Template.php';
+//require './classes/Template.php';
 require_once './model/BlogPost.php';
-/*require './PlayPHP/class/Controller.php';*/
+/*require './PlayPHP/classes/Controller.php';*/
 require_once './model/Comments.php';
 require_once './model/Tags.php';
 /*

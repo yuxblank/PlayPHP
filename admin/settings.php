@@ -38,7 +38,7 @@ define ("TEMPLATE", "core");
 $debug = true;
 define('APP_DEBUG', $debug);
 if ($debug) {
-    require '../libraries/3rdparty/kint/Kint.class.php';
+    require '../libraries/3rdparty/kint/Kint.classes.php';
 //    Kint::dump( $_SERVER );
     // or, even easier, use a shorthand:
 //    d( $_SERVER );

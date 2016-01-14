@@ -1,5 +1,5 @@
 <?php
-require '../class/Database.php';
+require '../classes/Database.php';
 /*
  * Copyright (C) 2015 yuri.blanc
  *

@@ -1,6 +1,6 @@
 <?php
 /**
- * Resize image class will allow you to resize an image
+ * Resize image classes will allow you to resize an image
  *
  * Can resize to exact size
  * Max width size while keep aspect ratio

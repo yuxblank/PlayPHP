@@ -1,6 +1,6 @@
 <?php
 //require '../libraries/Ajax.php';
-require_once'../class/PlayController.php';
+require_once'../classes/PlayController.php';
 /*
  * Copyright (C) 2015 yuri.blanc
  *

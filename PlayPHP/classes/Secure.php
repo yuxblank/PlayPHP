@@ -20,7 +20,7 @@ require 'security/Crypto.php';
 
 
 /**
- * Secure is a sub-class of Controller. it adds some security methods and dependecies. 
+ * Secure is a sub-classes of Controller. it adds some security methods and dependecies.
  * When your controller needs to use authentications or data encryption, extend your controller with Secure.
  *
  * @author yuri.blanc
@@ -57,7 +57,7 @@ class Secure extends Controller {
     
     
     /**
-     * Return an instance of Crypto class.
+     * Return an instance of Crypto classes.
      * @return Crypto
      */
     private static function Crypto() {

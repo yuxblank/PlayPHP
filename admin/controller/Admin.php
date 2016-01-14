@@ -1,8 +1,8 @@
 <?php
-//require '../class/Template.php';
+//require '../classes/Template.php';
 //require '../model/Products.php';
-//require '../class/Database.php';
-require_once '../class/PlayController.php';
+//require '../classes/Database.php';
+require_once '../classes/PlayController.php';
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates

@@ -27,7 +27,7 @@
           <?php 
           $html ="";
           foreach ($buttons as $button) {
-              $html.= "<button type='".$button->type."' class='".$button->class."' data-dismiss='modal'>".$button->label."</button>";
+              $html.= "<button type='".$button->type."' classes='".$button->class."' data-dismiss='modal'>".$button->label."</button>";
           }
           echo $html;
           ?>

@@ -18,7 +18,7 @@ include './config/app.php';
  */
 
 /**
- * This class provides routing methods for index.php. Some methods can be used also externally for inverse routing and url
+ * This classes provides routing methods for index.php. Some methods can be used also externally for inverse routing and url
  * retrive echoing the output. 
  * @author yuri.blanc
  * @copyright (c) 2015, Yuri Blanc

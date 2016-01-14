@@ -1,5 +1,5 @@
 <?php
-require_once './PlayPhp/class/Model.php';
+require_once './PlayPhp/classes/Model.php';
 /*
  * Copyright (C) 2015 yuri.blanc
  *

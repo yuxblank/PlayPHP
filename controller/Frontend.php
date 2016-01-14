@@ -1,6 +1,6 @@
 <?php
-//require './PlayPHP/class/Controller.php';
-require './PlayPHP/class/Secure.php';
+//require './PlayPHP/classes/Controller.php';
+require './PlayPHP/classes/Secure.php';
 require './model/BlogPost.php';
 require './model/Users.php';
 /*

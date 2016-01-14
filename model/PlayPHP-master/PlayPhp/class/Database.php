@@ -23,8 +23,8 @@ include './config/database.php';
  */
 
 /**
- * This class is a API based on top of PDO. The class allow query building, Object relationship mapping and db access.
- * The class can be used as an object instance but is rather better to extends your persistent objects with Model superclass that provide better API to this class
+ * This classes is a API based on top of PDO. The classes allow query building, Object relationship mapping and db access.
+ * The classes can be used as an object instance but is rather better to extends your persistent objects with Model superclass that provide better API to this classes
  * @author yuri.blanc
  * @version 0.2
  */
@@ -322,7 +322,7 @@ class Database {
     /**
      * Return a collection of ojects of a N to N relationship. The table must be called $object_$target, the N/N table must contain
      * $object_id reference. The table names uses the convetion of lowercase (@see ObjectInjector).
-     * Return an ArrayObject of the $target object class.
+     * Return an ArrayObject of the $target object classes.
      * @param object $object
      * @param string $target
      * @return \ArrayObject
@@ -358,7 +358,7 @@ class Database {
      * Return a collection of ojects of a N to N relationship. The table must be called $target_$object
      * , the N/N table must contain
      * $object_id reference. The table names uses the convetion of lowercase (@see ObjectInjector).
-     * Return an ArrayObject of the $target object class.
+     * Return an ArrayObject of the $target object classes.
      * @param type $object
      * @param type $target
      * @return \ArrayObject

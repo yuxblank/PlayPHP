@@ -28,8 +28,8 @@
 define("PlayExec", true);
 error_reporting(E_ALL & ~(E_NOTICE | E_STRICT | E_DEPRECATED));
 include_once 'controller/Frontend.php';
-include_once 'PlayPHP/class/Router.php';
-include_once 'PlayPHP/class/http/Request.php';
+include_once 'PlayPHP/classes/Router.php';
+include_once 'PlayPHP/classes/http/Request.php';
 //require 'libraries/Router.php';
 /*
  * ** ROUTING SETTINGS **

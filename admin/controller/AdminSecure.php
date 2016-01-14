@@ -1,6 +1,6 @@
 <?php
-require '../class/Database.php';
-require '../class/Security.php';
+require '../classes/Database.php';
+require '../classes/Security.php';
 /*
  * Copyright (C) 2015 yuri.blanc
  *
