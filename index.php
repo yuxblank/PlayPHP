@@ -61,9 +61,7 @@ if ($redirect) {
                     $request->setPost($name, $value);
                 }
                 break;
-            } else {
-                Router::notFound($redirect->action, "POST");
-            }
+            } 
             break;
         case 'GET':
             if (Router::checkRoutes($redirect->action, "GET")) {
@@ -74,12 +72,15 @@ if ($redirect) {
                     $request->setGet($i, $route[$i]);
                 }
                 */
+
+                if (!empty($_GET)) {
+                   
+                    $request->_setGet($_GET);
+                }
                 if (isset($redirect->getParams)){
                 $request->_setGet($redirect->getParams);
                 }
                 break;
-            } else {
-                Router::notFound($redirect->action, "GET");
             }
             break;
         case 'HEAD':
@@ -104,6 +105,7 @@ if ($redirect) {
         include_once APP_ROOT . 'controller/' . $c[0] . '.php';
         $controller = new $c[0]();
         $controller->$c[1]($request);
+        //call_user_func_array(array($controller,$c[1]), array("id" => 1));
     }
 } else {
     Router::notFound($route[0], "GET");

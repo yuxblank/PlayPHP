@@ -53,12 +53,13 @@ class Router {
      * @param mixed[] $params
      * @return string
      */
-    public static function go($action, $params = null) {
+    public static function go($action, $params = null, $method=null) {
         
-        $route = Router::findUrl($action);
+        $route = Router::findUrl($action, $method);
         if ($route) {
             // case with N params
             if (isset($params)) {
+                if (strpos($route->url, "{") || strpos($route->url, "}")) {
                 $queryString;
                 foreach($params as $key => $value) {
                     // find position of key
@@ -69,12 +70,17 @@ class Router {
                 }
                 // return queryString url
                 return APP_URL . $route->url;
+                } else {                   
+                    return APP_URL . $route->url . "?" . http_build_query($params);
+                }
             }
             // return url from json
             return APP_URL . "$route->url";
         } else {
             // not found, return /404
-            return APP_URL . "404";
+            //return APP_URL . "404";
+            http_response_code(404);
+            return APP_URL."404";
         }
     }
     /**
@@ -98,17 +104,26 @@ class Router {
         self::switchAction($action);
     }
     /**
-     * Find the url in routes from an action
+     * Find the url in routes from an action. The url returned is the first of the routes list.
      * @static
      * @param string $action
      * @return stdClass
      */
-    public static function findUrl($action) {
+    public static function findUrl($action, $method=null) {
          foreach (Router::getInstance()->routes as $route) {
-             if ($route->action == $action) {
-                 return $route;
+             if (!isset($method)) {
+                if ($route->action == $action) {
+                    return $route;
+                }
+             } else {
+                if ($route->action == $action && $route->method == $method) {
+                    return $route;
+                } 
              }
          }
+         // not found
+         http_response_code(404);
+         return null;
     }
     /**
      * Read the real URL and check if exist in routes. If the route contains ? wildcards, try to replace them with current values and check for match.
@@ -118,11 +133,9 @@ class Router {
      * @return stdClass
      */
     public static function findAction($query) {
-
         $queryArray = explode("/", $query);
         //print_r($queryArray);
-     
-        // check not paramtered routes
+        // check not parametered routes
         foreach (Router::getInstance()->routes as $route) {
          //echo "for 1";
             if ($route->url === $query) {
@@ -131,78 +144,38 @@ class Router {
                 $route->url = $query;
                 return $route;
             } else if (preg_match("({[aA-zZ 0-9]+})",$route->url)) {
-              
-             // check parametered routes  
-            $queryReplace;
-            //echo "for 2";
-            $routeArray = explode("/", $route->url);
-            //print_r($routeArray);
-            $replaceArray = array();
-            // check about size
-                if (count($queryArray) === count($routeArray)) { 
-                    //create params array
-                    $paramsArray = array();
-                    for ($i=0;$i<count($queryArray);$i++) {
-                        if ($queryArray[$i] === $routeArray[$i]) {
-                            //echo $queryArray[$i]  . "===" . $routeArray[$i] . "<br>";
-                            $replaceArray[$i] = $queryArray[$i];
-                        } else if (preg_match("({[aA-zZ0-9]+})",$routeArray[$i])) {
-                            //echo "preg match ". $routeArray[$i] . "<br>";
-                            $replaceArray[$i] = $queryArray[$i];
-                            $paramsArray[str_replace(array("{","}"),"",$routeArray[$i])] = $queryArray[$i];
+                // check parametered routes  
+                $queryReplace;
+                //echo "for 2";
+                $routeArray = explode("/", $route->url);
+                //print_r($routeArray);
+                $replaceArray = array();
+                // check about size
+                    if (count($queryArray) === count($routeArray)) { 
+                        //create params array
+                        $paramsArray = array();
+                        for ($i=0;$i<count($queryArray);$i++) {
+                            if ($queryArray[$i] === $routeArray[$i]) {
+                                $replaceArray[$i] = $queryArray[$i];
+                            } else if (preg_match("({[aA-zZ0-9]+})",$routeArray[$i])) {
+                                $replaceArray[$i] = $queryArray[$i];
+                                $paramsArray[str_replace(array("{","}"),"",$routeArray[$i])] = $queryArray[$i];
+                            }
                         }
-                        // check non equals values
-                        //  "/({[aA-zZ 0-9]+})+/"  
-                        }
-                    $newUrl = implode("/", $replaceArray);
-                    //echo "<br>".$newUrl;
-                      if ($newUrl===$query) {
-                        $route->url = $query;
-                        $route->getParams = $paramsArray;
-                        return $route;
-                        }
-                
-            }
-        }     
-        // check parametered routes  
-        /*
-            $queryReplace = null;
-            echo "for 2";
-            $routeArray = explode("/", $route->url);
-            // check about size
-                if (count($queryArray) === count($routeArray)) {
-                foreach ($queryArray as $key => $value) {
-                    
-                    // check non equals values
-                    //  "/({[aA-zZ 0-9]+})+/"
-                
-                        if ($newUrl===$query) {
-                        $route->url = $query;
-                        return $route;
-                        }
-                    
-                    
-                        
-                    }
-                    
-                    /*
-                    if (strpos($route->url, "?")) {
-                        $queryReplace = str_replace("?", $value, $route->url);
-                        if ($queryReplace == $query) {
-                            $route->url = $query;
-                            return $route;
-                        }
-                    }
-                
-                if (!count(array_diff($queryArray, $routeArray))>0) {
-                    $route->url = $query;
-                    return $route;
+                        $newUrl = implode("/", $replaceArray);
+                        //echo "<br>".$newUrl;
+                            if ($newUrl===$query) {
+                                    $route->url = $query;
+                                    // set params array for {values} substitution
+                                    $route->getParams = $paramsArray;
+                                    return $route;
+                            }
                 }
-            }
-                 */
-                  
-        }  
+            }                  
+      }  
         // return 404
+        //return $route;
+        http_response_code(404);
         return $route;
     }
     /**
@@ -230,16 +203,27 @@ class Router {
         return explode("@", $action->action);
     }
     
+    
     /**
      * Performs a 404 not found
      * @static
      * @param string $action
      * @param string $method
      */
-    public static function notFound($action, $method) {
+     
+    public static function notFound() {
+      // http_response_code(404);
         if (APP_DEBUG) {
-            die("Route not found:: $action with method " . $method . "<br>");
+            die("Route not found:: with method <br>");
         }
+        $r = Router::go("Errors@404");
+        http_response_code(404);
+        header("location:$r", true);
+    }
+    
+    
+    public static function methodNotAllowed() {
+            
     }
 
 }

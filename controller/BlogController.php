@@ -49,21 +49,25 @@ class BlogController extends Controller {
     public function showPost($params) { 
         // create blogpost object
         $post = new BlogPost();
-        // create view
-        $this->template = new \PlayPhp\Classes\View();
         //find post
         $post = $post->findById($params->getGet()["id"]);
-        $this->template->renderArgs("post", $post);
-        $this->template->renderArgs("page_title", "Blog post: $post->title");
-        // get post tags using oneToMany
-       
-       
+        if (!empty($post)) {
+            // create view
+            $this->template = new \PlayPhp\Classes\View();
+            
+            $this->template->renderArgs("post", $post);
+            $this->template->renderArgs("page_title", "Blog post: $post->title");
+            // get post tags using oneToMany
         // get post comments
         $comment = new Comments ();
         $comments = $comment->findAll("WHERE blogpost_id=?", array($post->id));
         $this->template->renderArgs("comments", $comments);
         // render view
         $this->template->render("Frontend/post");
+        } else {
+            Router::notFound();
+        }
+        
     }
     
     public function filterTag($params) {

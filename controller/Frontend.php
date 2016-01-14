@@ -42,6 +42,7 @@ class Frontend extends Secure {
 
     }
     public function login() {
+    
         if (Controller::getSession('user')==null) {
             
         $view =  new \PlayPhp\Classes\View();

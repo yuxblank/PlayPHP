@@ -4,6 +4,7 @@ PlayPHP Changelog
 * [*] FIX                *
 * [+] NEW FEATURE        *
 * [-] REMOVED            *
+* [<-->] notes, not impl.*
 **************************
 
 29/11/2015 :
@@ -23,4 +24,16 @@ PlayPHP Changelog
 <-->
 || notes ||
 Still need a better Request class, http delegation and params injection via varargs.
+<-->
+
+14/01/2016
++ added support for query string parameters ?id=1&name=karl
++ priority routes should be on top for the same action
++ return 404 status and various corrections
++ go now can take $metod parameters in ordet to allow equal url but different method. eg. Router::go($action,$data,$method);
+- removed ununsed function calls in index.php
+<-->
+|| notes ||
+Request can inject non-ordinal params using reflection, based on {} fields of routes
+http://stackoverflow.com/questions/30366804/how-to-call-php-anonymous-function-with-different-order-of-arguments
 <-->

@@ -25,7 +25,6 @@ require_once './PlayPHP/class/Controller.php';
 class Errors extends Controller {
     
     public function page404 () {
-
         $view = new \PlayPhp\Classes\View();
         $view->renderArgs("page_title", "Page not found");
         $view->render("error/404");
