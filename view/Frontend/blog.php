@@ -6,24 +6,18 @@
 </div>
 
 
-            <?php foreach ($posts as $post) {
+            <?php foreach ($posts as $post):
         
-                
-                ?>
+            ?>
             <div class='panel panel-default' style='padding:15px;'>
                 <h1><?php echo $post->title ?></h1>
                 <p><?php echo $post->text ?> </p>
                 <p><a href='<?php echo Router::go("BlogController@showPost", array("id"=> $post->id, "title"=>$post->title)) ?>'>Read more...</a></p>
-                    <?php foreach ($post->tags() as $tag) { ?>
-                <?php 
-                 /*
-                  * example of onetomany in template
-                  */
-                ?>
+                    <?php //foreach ($post->tags() as $tag): ?>
                       <a href='filterTag/<?php echo $tag->tag ?>' class='btn btn-info btn-sm' ><?php echo $tag->tag ?></a>
-                    <?php } ?>
+
             </div>  
-    <?php } ?>
+    <?php     endforeach;  ?>
 
     <nav>
 

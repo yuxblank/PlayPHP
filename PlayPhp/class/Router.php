@@ -60,17 +60,19 @@ class Router {
             // case with N params
             if (isset($params)) {
                 if (strpos($route->url, "{") || strpos($route->url, "}")) {
-                $queryString;
+                    $queryString = "";
                 foreach($params as $key => $value) {
+                    $queryString = $route->url;
                     // find position of key
                     $currentParam = "{".$key."}";
-                    if (strpos($route->url, $currentParam)) {
-                       $route->url = str_replace($currentParam, $value, $route->url);   
-                    }   
+                    if (strpos($queryString, $currentParam)) {
+                        $queryString = str_replace($currentParam, $value, $queryString);
+                    }
                 }
                 // return queryString url
-                return APP_URL . $route->url;
-                } else {                   
+
+                return APP_URL . $queryString;
+                } else {
                     return APP_URL . $route->url . "?" . http_build_query($params);
                 }
             }

@@ -192,6 +192,16 @@ class Database {
         return $this->rowCount();
     }
 
+    public function _countObjects($object,$query,$params) {
+        $table = $this->objectInjector($object);
+        $query = "SELECT COUNT(*) FROM $table $query";
+        $this->query($query);
+        $this->paramsBinder($params);
+        return $this->rowCount();
+    }
+
+
+
     /**
      * Persist an object in the data-layer
      * @param object $object
@@ -226,8 +236,8 @@ class Database {
         $values = substr($values, 0, -1);
         $values.=" WHERE id=:id";
         $statement.=$values;
-        print_r($object);
-        echo $statement;
+        //print_r($object);
+        //echo $statement;
         $this->stm = $this->pdo->prepare($statement);
 
         foreach ($object as $key =>$value) {
@@ -315,16 +325,20 @@ class Database {
                 d($e->getTrace());
             }
             return;
+
         }
-        $query = "SELECT * FROM $child WHERE ". $parent ."_id = (SELECT id FROM $parent WHERE id=?)";
+        $query = "SELECT * FROM $child WHERE ". $parent ."_id =?";
         $this->query($query);
         $this->bindValue(1, $object->id);
 
+
         return $this->fetchObjectSet($target);
+
 
         /*
          * SELECT * FROM `tags` WHERE blogpost_id = (SELECT  id FROM blogpost WHERE ID = 20)
          */
+
 
     }
 

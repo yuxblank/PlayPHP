@@ -131,7 +131,7 @@ class Frontend extends Secure {
 //        $pages = ceil($items/5);
         $blogPosts = $blogPosts->findAll();
         $view->renderArgs("page_title","Blog");
-        $view->renderArgs("pages",$pages);
+        //$view->renderArgs("pages",$pages);
         $view->renderArgs("posts", $blogPosts);
         $view->render("Frontend/blog");
     }

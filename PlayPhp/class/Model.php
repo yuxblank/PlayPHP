@@ -33,8 +33,11 @@ abstract class Model  {
     public final function countObjects() {
         return self::$db->countObjects(get_called_class());
     }
+    public final function _countObjects($query, $params) {
+        return self::$db->_countObjects(get_called_class(),$query,$params);
+    }
 
-    public final  function delete($object, $id) {
+    public final  function delete($id) {
         return self::$db->delete(get_called_class(), $id);
     }
 
