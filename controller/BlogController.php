@@ -39,8 +39,11 @@ class BlogController extends Controller {
             $db->save($blogPost);
 
 
-        } else {
-            Controller::keep("error", "NOT LOGGED IN");
+        } else if (Controller::getSession("user") != "admin") {
+            Controller::keep("error", "You are not allowed");
+        }
+        else if (!Controller::getSession("user")) {
+            Controller::keep("error", "You are not allowed");
         }
         Router::switchAction("Frontend@blog");
         

@@ -13,9 +13,9 @@
                 <h1><?php echo $post->title ?></h1>
                 <p><?php echo $post->text ?> </p>
                 <p><a href='<?php echo Router::go("BlogController@showPost", array("id"=> $post->id, "title"=>$post->title)) ?>'>Read more...</a></p>
-                    <?php //foreach ($post->tags() as $tag): ?>
+                    <?php foreach ($post->tags() as $tag): ?>
                       <a href='filterTag/<?php echo $tag->tag ?>' class='btn btn-info btn-sm' ><?php echo $tag->tag ?></a>
-
+                    <?php endforeach; ?>
             </div>  
     <?php     endforeach;  ?>
 

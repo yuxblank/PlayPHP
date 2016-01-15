@@ -13,7 +13,8 @@
   {"action" : "Frontend@authenticateAjax", "method" : "POST", "url" : "authenticateAjax"},
   {"action" : "Frontend@addComment", "method" : "POST", "url" : "addComment"},
   {"action" : "Blogcontroller@filterTag", "method" : "GET", "url" : "filterTag/{tag}"},
- 
+  {"action" : "Test@put", "method" : "PUT", "url" : "test/put"},
+  {"action" : "Test@delete", "method" : "DELETE", "url" : "test/delete"},
  
  
   {"action" : "Errors@page404", "method" : "GET", "url" : "404"}

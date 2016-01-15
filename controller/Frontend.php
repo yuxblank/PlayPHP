@@ -60,12 +60,11 @@ class Frontend extends Secure {
     }
     
     public function authenticate($params) {
-       if ($params->getPost('username') && $params->getPost('password')) {
-           $username = $params->getPost('username');
-           $password = $params->getPost('password');
+       if ($params->getPost()['username'] && $params->getPost()['password']) {
+           $username = $params->getPost()['username'];
+           $password = $params->getPost()['password'];
            $user = new Users();
            $db = new Database(); 
-       
            
            $db->find($user, "WHERE username=? AND pass=?", $params);
            if ($username == "admin" && $password == "pass") {
@@ -78,12 +77,11 @@ class Frontend extends Secure {
     }
     
     public function authenticateAjax($params){
-
         
-        if ($params->getPost('username') && $params->getPost('password')) {
-           $username = $params->getPost('username');
-           $password = $params->getPost('password');
-           
+        if ($params->getPost()['username'] && $params->getPost()['password']) {
+           $username = $params->getPost()['username'];
+           $password = $params->getPost()['password'];
+           print_r($params);
            
            $db = new Database(); 
            $dbUser = $db->find('Users', "WHERE username=? AND password=?", array($username, Secure::encryptPassword($password)));
@@ -104,9 +102,9 @@ class Frontend extends Secure {
             $view =  new \PlayPhp\Classes\View();
             $view->renderArgs("page_title","Register");
             $view->render("Frontend/register");
-    } else if ($params->getPost('username') && $params->getPost('password')) {
-            $username = $params->getPost('username');
-            $password = sha1($params->getPost('password'));  
+    } else if ($params->getPost()['username'] && $params->getPost()['password']) {
+            $username = $params->getPost()['username'];
+            $password = sha1($params->getPost()['username']);  
             $user = new Users($username, $password);
             $db = new Database();
             $db->save($user);

@@ -28,8 +28,11 @@ class Request {
     /**
      * @return array
      */
-    public function getPost()
+    public function getPost($name=null)
     {
+        if (isset($name)) {
+            return $this->post[$name];
+        }
         return $this->post;
     }
 
@@ -44,8 +47,11 @@ class Request {
     /**
      * @return array
      */
-    public function getGet()
+    public function getGet($name=null)
     {
+        if (isset($name)) {
+            return $this->get[$name];
+        }
         return $this->get;
     }
 
@@ -57,10 +63,41 @@ class Request {
         $this->get[$name] = $value;
     }
     
-    public function _setGet($params) {
+    public function _setGet($params) 
+    {
         foreach ($params as $key => $value) {
             $this->get[$key] = $value;
         }
+    }
+    
+     public function setPut($params)
+      {
+        foreach ($params as $key => $value) {
+            $this->put[$key] = $value;
+        }
+    }
+    
+    public function getPut($name=null)
+     {
+        if (isset($name)) {
+            return $this->put[$name];
+        }
+        return $this->put;
+    }
+    
+    public function setDelete($params) 
+    {
+        foreach ($params as $key => $value) {
+            $this->delete[$key] = $value;
+        }
+    }
+    
+    public function getDelete($name=null) 
+    {
+        if (isset($name)) {
+            return $this->delete[$name];
+        }
+        return $this->delete;
     }
 
 

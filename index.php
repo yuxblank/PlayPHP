@@ -46,15 +46,46 @@ $paths = parse_url($root, PHP_URL_PATH);
 $route = explode("/", $paths);
 $request = new Request();
 $redirect = Router::findAction($paths);
+// support for / index
 if ($uri == "/") {
     $redirect = Router::findAction($uri);
 }
 if ($redirect) {
     $rest = $_SERVER['REQUEST_METHOD'];
+    if(isset($_SERVER['CONTENT_TYPE'])) {
+        // TODO about isn't set
+        $content_type = $_SERVER['CONTENT_TYPE'];
+    }
     switch ($rest) {
+        case 'GET':
+            if (Router::checkRoutes($redirect->action, "GET")) {
+                // get paramets ?name=value
+                if (!empty($_GET)) {
+                    $request->_setGet($_GET);
+                }
+                // pHackp parameters {name} in URI
+                if (isset($redirect->getParams)){
+                    $request->_setGet($redirect->getParams);
+                }
+                break;
+            }
+            // TODO check about waterfall
         case 'PUT':
-            //rest_put($request);
-            break;
+        if (Router::checkRoutes($redirect->action, "PUT")) 
+        {
+             $body = file_get_contents("php://input");
+                parse_str($body, $parsed);
+                switch ($content_type) 
+                {
+                    case "application/json":
+                        $request->setPut(json_decode($body));
+                        break;
+                    case "application/x-www-form-urlencoded":
+                         $request->setPut($parsed);
+                         break;
+                }
+                break;
+            } 
         case 'POST':
             if (Router::checkRoutes($redirect->action, "POST")) {
                 foreach ($_POST as $name => $value) {
@@ -63,31 +94,25 @@ if ($redirect) {
                 break;
             } 
             break;
-        case 'GET':
-            if (Router::checkRoutes($redirect->action, "GET")) {
-               
-                //preg_match("[\d-aA-zZ\/]+", $app_root); // drop {}
-                /*for ($i = 0; $i < count($route); $i++) {
-                    // TODO odd routes should trow an exception
-                    $request->setGet($i, $route[$i]);
-                }
-                */
-
-                if (!empty($_GET)) {
-                   
-                    $request->_setGet($_GET);
-                }
-                if (isset($redirect->getParams)){
-                $request->_setGet($redirect->getParams);
-                }
-                break;
-            }
-            break;
         case 'HEAD':
             //rest_head($request);
             break;
         case 'DELETE':
             if (Router::checkRoutes($redirect->action, "DELETE")) {
+                
+                $body = file_get_contents("php://input");
+                parse_str($body, $parsed);
+                switch ($content_type) 
+                {
+                    case "application/json":
+                        $request->setDelete(json_decode($body));
+                        break;
+                    case "application/x-www-form-urlencoded":
+                         $request->setDelete($parsed);
+                         break;
+                }
+                break;
+                
                 
             }
             break;

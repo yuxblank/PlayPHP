@@ -24,6 +24,7 @@ PlayPHP Changelog
 <-->
 || notes ||
 Still need a better Request class, http delegation and params injection via varargs.
+[not solved]
 <-->
 
 14/01/2016
@@ -36,4 +37,12 @@ Still need a better Request class, http delegation and params injection via vara
 || notes ||
 Request can inject non-ordinal params using reflection, based on {} fields of routes
 http://stackoverflow.com/questions/30366804/how-to-call-php-anonymous-function-with-different-order-of-arguments
+[not solved]
 <-->
+
+14/01/2016
++ added REST PUT, DELETE
++ index routing for content types
++ refactoring of Request Class. getter/setter methods
+
+
