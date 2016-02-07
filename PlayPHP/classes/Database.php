@@ -229,19 +229,18 @@ class Database {
         $statement = "UPDATE $table SET ";
         $values="";
         foreach ($object as $key => $value) {
-            if(!empty($value)) {
+            if(isset($value) && $value!=null) {
                 $values .= $key . "=:" . $key . ",";
             }
         }
         $values = substr($values, 0, -1);
         $values.=" WHERE id=:id";
         $statement.=$values;
-        //print_r($object);
-        //echo $statement;
+
         $this->stm = $this->pdo->prepare($statement);
 
         foreach ($object as $key =>$value) {
-            if(!empty($value)) {
+            if(isset($value) && $value!=null) {
                 $this->bindValue($key, $value);
             }
         }

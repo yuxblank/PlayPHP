@@ -105,6 +105,10 @@ class Router {
         $action = Router::findAction($url);
         self::switchAction($action);
     }
+
+    public static function _redirect($url) {
+        header("location:$url",true,302);
+    }
     /**
      * Find the url in routes from an action. The url returned is the first of the routes list.
      * @static
