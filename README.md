@@ -1,6 +1,5 @@
 # PlayPHP
-PlayPHP is a lightweight framework for php for making OOP applications.
-The toolkit is fully MVC for quick development and data abstraction.
-The application is at very early stage, please consider contributing to the project.
+PlayPHP project is no longer under development, it has been forked and replaced by pHackp:
+https://github.com/yuxblank/phackp
 
 
